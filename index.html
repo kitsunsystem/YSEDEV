@@ -98,6 +98,15 @@
         ::-webkit-scrollbar-thumb { background: #1e0e37; border-radius: 4px; border: 2px solid #020005; }
         ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
 
+        /* Hide scrollbar for carousels */
+        .scrollbar-none::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-none {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         /* Magnetic button glow */
         .btn-glow { position: relative; }
         .btn-glow::before {
@@ -361,7 +370,7 @@
                 <!-- Massive central floating logo -->
                 <div id="hero-logo-container" class="opacity-0 mb-8 flex justify-center relative group">
                     <div class="absolute inset-0 bg-cyber-violet/30 rounded-full blur-3xl scale-90 group-hover:scale-110 transition-transform duration-1000"></div>
-                    <img src="logo.png" alt="Kitsun Logo Hologram" class="h-48 md:h-64 w-auto object-contain animate-float drop-shadow-[0_0_45px_rgba(139,92,246,0.6)] relative z-10 transition-transform duration-700 group-hover:scale-[1.05]">
+                    <img src="logo.png" alt="Kitsun Logo Hologram" class="h-32 sm:h-44 md:h-64 w-auto object-contain animate-float drop-shadow-[0_0_45px_rgba(139,92,246,0.6)] relative z-10 transition-transform duration-700 group-hover:scale-[1.05]">
                 </div>
                 
                 <h1 id="hero-title" class="opacity-0 text-3xl sm:text-5xl md:text-8xl font-display font-bold mb-6 leading-tight uppercase tracking-tight text-white h-[120px] sm:h-[160px] md:h-[220px] flex items-center justify-center">
@@ -459,9 +468,9 @@
                         <h4 class="text-2xl font-display font-bold uppercase tracking-wider text-white">I. Pôle Développement Logiciel & Cloud (Principal)</h4>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-8 scrollbar-none">
                         <!-- Web & Infrastructure -->
-                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper snap-center shrink-0 w-[85%] md:w-auto md:shrink-1">
                             <div class="card-glow-spotlight"></div>
                             <i class="ph-duotone ph-browsers text-5xl text-cyber-purple mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(167,139,250,0.3)]"></i>
                             <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">1. Web & Infrastructure</h5>
@@ -473,7 +482,7 @@
                         </div>
 
                         <!-- Automatisations Custom -->
-                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper snap-center shrink-0 w-[85%] md:w-auto md:shrink-1">
                             <div class="card-glow-spotlight"></div>
                             <i class="ph-duotone ph-plugs text-5xl text-purple-400 mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(192,132,252,0.3)]"></i>
                             <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">2. Automatisations Custom</h5>
@@ -485,7 +494,7 @@
                         </div>
 
                         <!-- Infra & Cyber-Sécurité -->
-                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper snap-center shrink-0 w-[85%] md:w-auto md:shrink-1">
                             <div class="card-glow-spotlight"></div>
                             <i class="ph-duotone ph-shield-check text-5xl text-cyber-violet mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]"></i>
                             <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">3. Infra & Cyber-Sécurité</h5>
@@ -505,9 +514,9 @@
                         <h4 class="text-2xl font-display font-bold uppercase tracking-wider text-white">II. Pôle Automatisation Trading</h4>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 lg:pb-0 lg:grid lg:grid-cols-2 lg:gap-8 scrollbar-none">
                         <!-- Bots Telegram VIP & SaaS -->
-                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper snap-center shrink-0 w-[85%] lg:w-auto lg:shrink-1">
                             <div class="card-glow-spotlight"></div>
                             <div class="absolute top-0 right-0 w-60 h-60 bg-cyber-violet/5 rounded-full blur-3xl group-hover:bg-cyber-magenta/15 transition-all"></div>
                             <i class="ph-duotone ph-paper-plane-tilt text-6xl text-cyber-purple mb-6 relative z-10 drop-shadow-[0_0_15px_rgba(139,92,246,0.4)]"></i>
@@ -521,7 +530,7 @@
                         </div>
 
                         <!-- Trading & MT5 -->
-                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper snap-center shrink-0 w-[85%] lg:w-auto lg:shrink-1">
                             <div class="card-glow-spotlight"></div>
                             <i class="ph-duotone ph-trend-up text-5xl text-cyber-magenta mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(217,70,239,0.3)]"></i>
                             <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">2. Trading & MT5</h5>
@@ -551,33 +560,33 @@
                         <!-- Group 1: Core components -->
                         <div class="glass p-6 rounded-2xl border border-white/5 space-y-4">
                             <h4 class="text-sm font-bold text-cyber-purple font-display uppercase tracking-widest border-b border-white/5 pb-2">// 1. Cœur du Système</h4>
-                            <div class="space-y-3">
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="web">
+                            <div class="grid grid-cols-2 gap-2.5 md:flex md:flex-col md:gap-3 md:space-y-0">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="web">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Web & Dashboard</span>
-                                        <span class="text-xs text-gray-400 font-light">Interfaces d'administration & portails clients</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Web & Dashboard</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Interfaces d'administration & portails clients</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="telegram">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="telegram">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Bot Telegram VIP</span>
-                                        <span class="text-xs text-gray-400 font-light">Distribution de signaux et automatisations chat</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Bot Telegram VIP</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Distribution de signaux et automatisations chat</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="mt5">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="mt5">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Passerelle Trading MT5</span>
-                                        <span class="text-xs text-gray-400 font-light">Exécution et réplication d'ordres en direct</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Passerelle Trading MT5</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Exécution et réplication d'ordres en direct</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="script">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="script">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Scripts d'Automatisation</span>
-                                        <span class="text-xs text-gray-400 font-light">Calculs de fond, API privées et scripts custom</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Scripts d'Automatisation</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Calculs de fond, API privées et scripts custom</span>
                                     </div>
                                 </label>
                             </div>
@@ -586,33 +595,33 @@
                         <!-- Group 2: Integration components -->
                         <div class="glass p-6 rounded-2xl border border-white/5 space-y-4">
                             <h4 class="text-sm font-bold text-cyber-magenta font-display uppercase tracking-widest border-b border-white/5 pb-2">// 2. Intégrations & Sécurité</h4>
-                            <div class="space-y-3">
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="db">
+                            <div class="grid grid-cols-2 gap-2.5 md:flex md:flex-col md:gap-3 md:space-y-0">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="db">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">PostgreSQL / Base SQL</span>
-                                        <span class="text-xs text-gray-400 font-light">Stockage sécurisé, structuré et performant</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">PostgreSQL / Base SQL</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Stockage sécurisé, structuré et performant</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="pay">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="pay">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Paywall Stripe & Crypto</span>
-                                        <span class="text-xs text-gray-400 font-light">Facturation stripe et paiements cryptomonnaies</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Paywall Stripe & Crypto</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Facturation stripe et paiements cryptomonnaies</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="ai">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="ai">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Intelligence Artificielle</span>
-                                        <span class="text-xs text-gray-400 font-light">Rapports IA, analyses et traitement LLM</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Intelligence Artificielle</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Rapports IA, analyses et traitement LLM</span>
                                     </div>
                                 </label>
-                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
-                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="vps">
+                                <label class="flex items-center gap-2.5 md:gap-4 p-3 md:p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-4 h-4 md:w-5 md:h-5 accent-cyber-violet rounded" data-opt="vps">
                                     <div class="flex flex-col">
-                                        <span class="text-sm font-bold text-white uppercase font-display">Hébergement VPS Sécurisé</span>
-                                        <span class="text-xs text-gray-400 font-light">Infrastructures cloud optimisées haute perf</span>
+                                        <span class="text-xs md:text-sm font-bold text-white uppercase font-display">Hébergement VPS Sécurisé</span>
+                                        <span class="hidden md:inline text-[10px] md:text-xs text-gray-400 font-light">Infrastructures cloud optimisées haute perf</span>
                                     </div>
                                 </label>
                             </div>
@@ -725,26 +734,26 @@
                 <div class="text-center mb-20 gs-reveal">
                     <h3 class="text-3xl md:text-4xl font-display font-bold uppercase tracking-wider text-white">Pourquoi Choisir Kitsun System ?</h3>
                 </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5">
+                <div class="flex overflow-x-auto snap-x snap-mandatory gap-4 pb-6 md:pb-0 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 scrollbar-none">
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5 snap-center shrink-0 w-[80%] md:w-auto md:shrink-1">
                         <i class="ph-fill ph-rocket-launch text-5xl text-cyber-violet mb-4 drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]"></i>
                         <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Livraison Rapide</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">Une architecture complète et un SaaS de copy trading privé opérationnel sous 15 jours.</p>
                     </div>
                     
-                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 100ms;">
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5 snap-center shrink-0 w-[80%] md:w-auto md:shrink-1" style="transition-delay: 100ms;">
                         <i class="ph-fill ph-users-three text-5xl text-cyber-purple mb-4 drop-shadow-[0_0_10px_rgba(167,139,250,0.3)]"></i>
                         <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Équipe d'Élite</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">Ingénieurs passionnés assurant des structures hautement optimisées et robustes.</p>
                     </div>
 
-                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 200ms;">
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5 snap-center shrink-0 w-[80%] md:w-auto md:shrink-1" style="transition-delay: 200ms;">
                         <i class="ph-fill ph-strategy text-5xl text-cyber-magenta mb-4 drop-shadow-[0_0_10px_rgba(217,70,239,0.3)]"></i>
                         <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Support Réactif</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">Assistance et monitoring 24/7 de vos serveurs pour une tranquillité absolue.</p>
                     </div>
 
-                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 300ms;">
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5 snap-center shrink-0 w-[80%] md:w-auto md:shrink-1" style="transition-delay: 300ms;">
                         <i class="ph-fill ph-infinity text-5xl text-yellow-400 mb-4 drop-shadow-[0_0_10px_rgba(250,204,21,0.3)]"></i>
                         <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Scalabilité</h4>
                         <p class="text-gray-400 text-sm leading-relaxed">Possibilité d'ajouter des indicateurs ou des fonctionnalités sur demande à tout moment.</p>
@@ -769,30 +778,30 @@
                         Vous avez une idée de bot Telegram, de passerelle MT5 ou de SaaS complexe ?
                     </p>
 
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mb-14">
-                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
-                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">1</div>
-                            <p class="text-gray-300 text-sm">Vous nous décrivez votre projet sur Telegram.</p>
+                    <div class="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6 text-left mb-14">
+                        <div class="p-3.5 md:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-md">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">1</div>
+                            <p class="text-gray-300 text-[11px] md:text-sm">Vous nous décrivez votre projet sur Telegram.</p>
                         </div>
-                        <div class="p-6 rounded-xl bg-cyber-violet/10 border border-cyber-violet/30 flex gap-4 items-start shadow-[0_0_15px_rgba(139,92,246,0.15)]">
-                            <div class="w-8 h-8 rounded-full bg-cyber-magenta text-white flex items-center justify-center font-bold shrink-0 font-mono">2</div>
-                            <p class="text-white font-bold text-sm">Nous concevons la solution gratuitement.</p>
+                        <div class="p-3.5 md:p-6 rounded-xl bg-cyber-violet/10 border border-cyber-violet/30 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cyber-magenta text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">2</div>
+                            <p class="text-white font-bold text-[11px] md:text-sm">Nous concevons la solution gratuitement.</p>
                         </div>
-                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
-                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">3</div>
-                            <p class="text-gray-300 text-sm">Nous organisons une démonstration en direct.</p>
+                        <div class="p-3.5 md:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-md">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">3</div>
+                            <p class="text-gray-300 text-[11px] md:text-sm">Nous organisons une démonstration en direct.</p>
                         </div>
-                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
-                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">4</div>
-                            <p class="text-gray-300 text-sm">Vous observez le fonctionnement en temps réel.</p>
+                        <div class="p-3.5 md:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-md">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">4</div>
+                            <p class="text-gray-300 text-[11px] md:text-sm">Vous observez le fonctionnement en temps réel.</p>
                         </div>
-                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
-                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">5</div>
-                            <p class="text-gray-300 text-sm">Si l'outil vous convient : nous validons l'estimation tarifaire.</p>
+                        <div class="p-3.5 md:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-md">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">5</div>
+                            <p class="text-gray-300 text-[11px] md:text-sm">Si l'outil vous convient : nous validons l'estimation tarifaire.</p>
                         </div>
-                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
-                            <div class="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center font-bold shrink-0 font-mono">6</div>
-                            <p class="text-gray-400 text-sm">Si cela ne correspond pas : aucun frais, aucun contrat.</p>
+                        <div class="p-3.5 md:p-6 rounded-xl bg-white/5 border border-white/10 flex flex-col md:flex-row gap-2.5 md:gap-4 items-start shadow-md">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-gray-600 text-white flex items-center justify-center text-xs md:text-sm font-bold shrink-0 font-mono">6</div>
+                            <p class="text-gray-400 text-[11px] md:text-sm">Si cela ne correspond pas : aucun frais, aucun contrat.</p>
                         </div>
                     </div>
 
