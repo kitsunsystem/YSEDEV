@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YSE DEV | Développeur sur mesure pour traders & créateurs de signaux</title>
+    <title>Kitsun System | Automatisation & Systèmes de Trading Élite</title>
+    <meta name="description" content="Développeur de bots Telegram, copy trading privé, liaisons MT5 en temps réel et SaaS sur mesure pour traders et créateurs de signaux.">
     
     <!-- Nouvelles Polices Premium : Rajdhani (Titres tech) & Outfit (Corps) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Rajdhani:wght@500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -19,19 +20,29 @@
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
                         display: ['Rajdhani', 'sans-serif'],
-                        mono: ['Courier New', 'monospace'],
+                        mono: ['Fira Code', 'Courier New', 'monospace'],
                     },
                     colors: {
                         cyber: {
-                            black: '#010308',
-                            dark: '#050a14',
-                            blue: '#0066ff',
-                            cyan: '#00e5ff',
-                            gray: '#1e293b'
+                            black: '#020005',
+                            dark: '#070212',
+                            deep: '#0e0421',
+                            violet: '#8b5cf6',
+                            purple: '#a78bfa',
+                            magenta: '#d946ef',
+                            gray: '#1e0e37'
                         }
                     },
                     animation: {
                         'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'float-delayed': 'float 6s ease-in-out infinite 3s',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-12px)' },
+                        }
                     }
                 }
             }
@@ -43,45 +54,49 @@
 
     <style>
         body {
-            background-color: #010308;
+            background-color: #020005;
             color: #ffffff;
             overflow-x: hidden;
         }
 
         ::selection {
-            background-color: rgba(0, 229, 255, 0.3);
-            color: #00e5ff;
+            background-color: rgba(139, 92, 246, 0.3);
+            color: #c084fc;
         }
 
         /* Glassmorphism */
         .glass {
-            background: rgba(5, 10, 20, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(7, 2, 18, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.1);
         }
 
         .glass-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(5, 10, 20, 0.8) 100%);
+            background: linear-gradient(145deg, rgba(14, 4, 33, 0.55) 0%, rgba(7, 2, 18, 0.9) 100%);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(0, 229, 255, 0.1);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 92, 246, 0.08);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .glass-card:hover {
-            border-color: rgba(0, 229, 255, 0.4);
-            box-shadow: 0 10px 40px -10px rgba(0, 102, 255, 0.3);
+            border-color: rgba(217, 70, 239, 0.35);
+            box-shadow: 0 15px 45px -10px rgba(139, 92, 246, 0.25);
+            transform: translateY(-4px);
         }
 
         /* Neon Glow Text */
-        .text-glow-blue { text-shadow: 0 0 20px rgba(0, 102, 255, 0.6); }
-        .text-glow-cyan { text-shadow: 0 0 20px rgba(0, 229, 255, 0.6); }
+        .text-glow-violet { text-shadow: 0 0 20px rgba(139, 92, 246, 0.6); }
+        .text-glow-magenta { text-shadow: 0 0 20px rgba(217, 70, 239, 0.6); }
+        .text-glow-white { text-shadow: 0 0 15px rgba(255, 255, 255, 0.4); }
 
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #010308; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020005; }
+        ::-webkit-scrollbar-thumb { background: #1e0e37; border-radius: 4px; border: 2px solid #020005; }
+        ::-webkit-scrollbar-thumb:hover { background: #8b5cf6; }
 
         /* Magnetic button glow */
         .btn-glow { position: relative; }
@@ -89,27 +104,57 @@
             content: '';
             position: absolute;
             top: -2px; left: -2px; right: -2px; bottom: -2px;
-            background: linear-gradient(45deg, #0066ff, #00e5ff, #0066ff);
+            background: linear-gradient(45deg, #8b5cf6, #d946ef, #8b5cf6);
             z-index: -1;
             filter: blur(15px);
             opacity: 0;
             transition: opacity 0.3s ease;
             border-radius: inherit;
         }
-        .btn-glow:hover::before { opacity: 0.8; }
+        .btn-glow:hover::before { opacity: 0.85; }
 
         /* Terminal scrollbar */
         .terminal-scroll::-webkit-scrollbar { width: 4px; }
-        .terminal-scroll::-webkit-scrollbar-thumb { background: #00e5ff; }
+        .terminal-scroll::-webkit-scrollbar-thumb { background: #8b5cf6; }
 
-        /* Animation Data Flow */
+        /* Cyberpunk static soft grid */
+        .cyber-grid {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px);
+            background-size: 80px 80px;
+            background-position: center top;
+            opacity: 0.12;
+            pointer-events: none;
+        }
+
+        /* Mouse glow card effect */
+        .card-glow-spotlight {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(120px circle at var(--x, 0) var(--y, 0), rgba(139, 92, 246, 0.12), transparent 85%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+            mix-blend-mode: screen;
+        }
+        .glass-card:hover .card-glow-spotlight {
+            opacity: 1;
+        }
+
+        /* Data dots for flow animation */
         .data-dot {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #00e5ff;
+            width: 6px;
+            height: 6px;
+            background: #d946ef;
             border-radius: 50%;
-            box-shadow: 0 0 10px #00e5ff, 0 0 20px #00e5ff;
+            box-shadow: 0 0 8px #d946ef, 0 0 16px #d946ef;
             opacity: 0;
         }
 
@@ -126,33 +171,172 @@
             100% { left: 0%; opacity: 0; }
         }
 
-        .animate-flow-right { animation: flowRight 1.5s ease-in-out forwards; }
-        .animate-flow-left { animation: flowLeft 1.5s ease-in-out forwards; }
+        .animate-flow-right { animation: flowRight 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .animate-flow-left { animation: flowLeft 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+
+        /* Preloader Gate Split Effect */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .preloader-panel {
+            position: absolute;
+            width: 50%;
+            height: 100%;
+            background: #020005;
+            transition: transform 1.2s cubic-bezier(0.85, 0, 0.15, 1);
+            pointer-events: all;
+        }
+        #preloader-left {
+            left: 0;
+            top: 0;
+            border-right: 1px solid rgba(139, 92, 246, 0.15);
+        }
+        #preloader-right {
+            right: 0;
+            top: 0;
+            border-left: 1px solid rgba(139, 92, 246, 0.15);
+        }
+        #preloader-content {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+            z-index: 10000;
+            pointer-events: all;
+        }
+        #preloader.loaded #preloader-left {
+            transform: translateX(-100%);
+        }
+        #preloader.loaded #preloader-right {
+            transform: translateX(100%);
+        }
+        #preloader.loaded #preloader-content {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.6);
+            filter: blur(15px);
+        }
+        #preloader.loaded {
+            pointer-events: none;
+        }
+
+        /* Splitting transition line */
+        /* Scanline scan disabled */
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -40;
+            }
+        }
+        .data-flow-line {
+            stroke-dasharray: 6, 6;
+            animation: dash 2s linear infinite;
+            stroke-width: 2.5px !important;
+        }
+
+        #preloader-info-group {
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        #preloader-btn-group {
+            transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-cyber-cyan/30 selection:text-cyber-cyan relative">
+<body class="antialiased selection:bg-cyber-violet/30 selection:text-cyber-purple relative">
 
-    <!-- Three.js Canvas Background (8k Planet Effect) -->
-    <canvas id="webgl-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-60"></canvas>
+    <!-- Preloader Boot Sequence -->
+    <div id="preloader">
+        <div id="preloader-left" class="preloader-panel"></div>
+        <div id="preloader-right" class="preloader-panel"></div>
+        <div id="preloader-content" class="w-full max-w-lg px-6 text-center">
+            <!-- Rotating Cosmic Tech Rings & SVG progress -->
+            <div class="relative w-64 h-64 mx-auto flex items-center justify-center mb-8">
+                <!-- Glowing Aura -->
+                <div class="absolute inset-0 bg-cyber-violet/20 rounded-full filter blur-2xl animate-pulse"></div>
+                
+                <!-- SVG circular loader -->
+                <svg class="absolute inset-0 w-full h-full transform -rotate-90" viewBox="0 0 200 200">
+                    <!-- Tech Background Ring -->
+                    <circle cx="100" cy="100" r="80" stroke="rgba(139, 92, 246, 0.08)" stroke-width="6" fill="transparent" />
+                    <!-- Dotted outer border -->
+                    <circle cx="100" cy="100" r="90" stroke="rgba(139, 92, 246, 0.2)" stroke-dasharray="3, 8" stroke-width="1.5" fill="transparent" class="animate-[spin_40s_linear_infinite]" />
+                    <!-- Dashboard decorative marks -->
+                    <circle cx="100" cy="100" r="85" stroke="rgba(217, 70, 239, 0.25)" stroke-dasharray="10, 40" stroke-width="1" fill="transparent" class="animate-[spin_20s_linear_infinite_reverse]" />
+                    <!-- Active Progress Arc -->
+                    <circle id="svg-progress-circle" cx="100" cy="100" r="80" stroke="url(#preloaderGrad)" stroke-width="6" stroke-linecap="round" fill="transparent" stroke-dasharray="502.6" stroke-dashoffset="502.6" class="transition-[stroke-dashoffset] duration-200" />
+                    
+                    <defs>
+                        <linearGradient id="preloaderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#8b5cf6" />
+                            <stop offset="50%" stop-color="#d946ef" />
+                            <stop offset="100%" stop-color="#8b5cf6" />
+                        </linearGradient>
+                    </defs>
+                </svg>
 
-    <!-- Background Gradients -->
+                <!-- Core Logo - enlarged to h-36 -->
+                <img src="logo.png" id="preloader-logo" alt="Kitsun Logo Hologram" class="h-36 w-auto object-contain drop-shadow-[0_0_30px_rgba(139,92,246,0.8)] animate-float relative z-10 transition-transform duration-700">
+            </div>
+            
+            <div class="h-28 flex flex-col items-center justify-center relative">
+                <!-- Status text and loading info -->
+                <div id="preloader-info-group" class="space-y-3 transition-all duration-500 w-full">
+                    <h2 class="text-3xl font-display font-bold uppercase tracking-[0.25em] text-white">
+                        KITSUN <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-violet to-cyber-magenta">SYSTEM</span>
+                    </h2>
+                    <div class="flex items-center justify-center gap-2 font-mono text-[9px] text-gray-500 uppercase tracking-widest">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyber-violet animate-ping"></span>
+                        <span id="boot-status-text">INITIALISATION DU NOYAU...</span>
+                    </div>
+                    <div id="boot-percent" class="font-mono font-bold text-cyber-magenta text-lg tracking-widest mt-1">00%</div>
+                </div>
+
+                <!-- Glowing interactive enter button (hidden initially) -->
+                <div id="preloader-btn-group" class="absolute hidden opacity-0 scale-90 transition-all duration-500 w-full">
+                    <button id="enter-system-btn" class="btn-glow px-8 py-3.5 bg-gradient-to-r from-cyber-violet via-cyber-magenta to-cyber-violet text-white font-display font-bold text-base uppercase tracking-[0.2em] rounded-lg border border-white/20 shadow-[0_0_35px_rgba(139,92,246,0.5)] transform hover:scale-[1.05] active:scale-[0.98] hover:border-cyber-magenta/40 transition-all duration-300">
+                        ACCÉDER AU SYSTÈME
+                    </button>
+                    <p class="text-[9px] font-mono text-cyber-purple/60 uppercase tracking-[0.25em] mt-3 animate-pulse">
+                        [ Clic pour initialiser l'infrastructure ]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warp speed color flash overlay -->
+    <div id="warp-flash" class="fixed inset-0 bg-gradient-to-br from-cyber-magenta via-cyber-violet to-cyber-black z-[99999] pointer-events-none opacity-0"></div>
+
+    <!-- Three.js Canvas Background (Double Helix Vortex) -->
+    <canvas id="webgl-canvas" class="fixed inset-0 z-0 pointer-events-none opacity-70"></canvas>
+
+    <!-- Background Gradients & Grid -->
     <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-        <div class="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-cyber-blue/10 rounded-full blur-[150px]"></div>
-        <div class="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-cyber-cyan/10 rounded-full blur-[150px]"></div>
+        <div class="cyber-grid"></div>
+        <div class="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-cyber-violet/10 rounded-full blur-[150px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[60%] h-[60%] bg-cyber-magenta/10 rounded-full blur-[150px]"></div>
+        <div class="absolute top-[40%] left-[30%] w-[40%] h-[40%] bg-purple-900/5 rounded-full blur-[120px]"></div>
     </div>
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-40 glass border-b border-white/5 transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <a href="#" class="text-3xl font-display font-bold text-white tracking-wider flex items-center gap-2 group">
-                <i class="ph-fill ph-hexagon text-cyber-cyan group-hover:text-cyber-blue transition-colors"></i>
-                YSE <span class="text-cyber-cyan group-hover:text-cyber-blue transition-colors">DEV</span>
+            <a href="#" class="flex items-center group">
+                <img src="logoHAUT.png" alt="Kitsun System Logo" class="h-14 md:h-20 w-auto object-contain transition-transform group-hover:scale-105">
             </a>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-                <a href="#about" class="text-gray-300 hover:text-cyber-cyan transition-colors">Qui suis-je ?</a>
-                <a href="#services" class="text-gray-300 hover:text-cyber-cyan transition-colors">Services</a>
-                <a href="#portfolio" class="text-gray-300 hover:text-cyber-cyan transition-colors">Réalisations</a>
-                <a href="#demo" class="btn-glow px-5 py-2.5 rounded-md bg-cyber-cyan/10 border border-cyber-cyan text-cyber-cyan hover:bg-cyber-cyan hover:text-cyber-black transition-all font-bold">
+                <a href="#about" class="text-gray-300 hover:text-cyber-purple transition-colors">Qui sommes-nous ?</a>
+                <a href="#services" class="text-gray-300 hover:text-cyber-purple transition-colors">Expertises</a>
+                <a href="#portfolio" class="text-gray-300 hover:text-cyber-purple transition-colors">Simulateur</a>
+                <a href="#demo" class="btn-glow px-5 py-2.5 rounded-md bg-cyber-violet/15 border border-cyber-violet/40 text-cyber-purple hover:bg-cyber-violet hover:text-cyber-black transition-all font-bold tracking-wide uppercase text-xs">
                     Réserver une démo
                 </a>
             </div>
@@ -163,51 +347,63 @@
     <main class="relative z-10 pt-20">
 
         <!-- HERO SECTION -->
-        <section class="min-h-[90vh] flex flex-col justify-center items-center text-center px-4 relative overflow-hidden">
-            <div class="max-w-4xl mx-auto gs-reveal">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyber-cyan/30 text-cyber-cyan text-sm font-mono mb-8 shadow-[0_0_15px_rgba(0,229,255,0.2)]">
-                    <span class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse"></span>
-                    <span>// Status: Online //</span>
+        <section class="min-h-[95vh] flex flex-col justify-center items-center text-center px-6 relative overflow-hidden">
+            <div class="max-w-4xl mx-auto relative">
+                <!-- Floating digital particles in hero (decorative) -->
+                <div class="absolute -top-16 -left-16 w-32 h-32 bg-cyber-violet/10 rounded-full blur-2xl animate-float"></div>
+                <div class="absolute -bottom-16 -right-16 w-32 h-32 bg-cyber-magenta/10 rounded-full blur-2xl animate-float-delayed"></div>
+
+                <div id="hero-badge" class="opacity-0 inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-cyber-violet/30 text-cyber-purple text-xs font-mono mb-8 shadow-[0_0_20px_rgba(139,92,246,0.15)]">
+                    <span class="w-2.5 h-2.5 rounded-full bg-cyber-magenta animate-pulse-fast"></span>
+                    <span>// KITSUN KERNEL OPERATIONAL //</span>
+                </div>
+
+                <!-- Massive central floating logo -->
+                <div id="hero-logo-container" class="opacity-0 mb-8 flex justify-center relative group">
+                    <div class="absolute inset-0 bg-cyber-violet/30 rounded-full blur-3xl scale-90 group-hover:scale-110 transition-transform duration-1000"></div>
+                    <img src="logo.png" alt="Kitsun Logo Hologram" class="h-48 md:h-64 w-auto object-contain animate-float drop-shadow-[0_0_45px_rgba(139,92,246,0.6)] relative z-10 transition-transform duration-700 group-hover:scale-[1.05]">
                 </div>
                 
-                <h1 class="text-6xl md:text-8xl font-display font-bold mb-6 leading-tight uppercase tracking-tight">
-                    <span id="typewriter" class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-blue to-cyber-cyan"></span><span class="animate-[pulse_1s_step-end_infinite] text-cyber-cyan">_</span>
+                <h1 id="hero-title" class="opacity-0 text-3xl sm:text-5xl md:text-8xl font-display font-bold mb-6 leading-tight uppercase tracking-tight text-white h-[120px] sm:h-[160px] md:h-[220px] flex items-center justify-center">
+                    <span id="typewriter" class="text-transparent bg-clip-text bg-gradient-to-r from-white via-cyber-purple to-cyber-magenta drop-shadow-[0_0_30px_rgba(139,92,246,0.2)]"></span><span class="animate-[pulse_1s_step-end_infinite] text-cyber-magenta">_</span>
                 </h1>
                 
-                <h2 class="text-xl md:text-2xl text-gray-300 font-light mb-8 max-w-3xl mx-auto leading-relaxed">
-                    Développeur sur mesure pour <span class="text-white font-semibold">traders & créateurs de signaux</span>.<br>
-                    Bots Telegram • Automatisation MT5 • SaaS privé • Solutions 100 % custom.
+                <h2 id="hero-subtitle" class="opacity-0 text-lg md:text-2xl text-gray-300 font-light mb-10 max-w-3xl mx-auto leading-relaxed">
+                    Ingénierie logicielle sur mesure & architectures d'élite.<br>
+                    Développement web • API & Cloud • Robotique & Automatisation Trading.
                 </h2>
                 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-                    <a href="#demo" class="btn-glow group relative px-8 py-4 bg-cyber-cyan text-cyber-black font-bold text-lg rounded-lg overflow-hidden w-full sm:w-auto text-center transition-all hover:scale-105">
+                <div id="hero-buttons" class="opacity-0 flex flex-col sm:flex-row items-center justify-center gap-5 mt-4">
+                    <a href="#demo" class="btn-glow group relative px-8 py-4 bg-gradient-to-r from-cyber-violet to-cyber-magenta text-white font-bold text-lg rounded-lg overflow-hidden w-full sm:w-auto text-center transition-all hover:scale-[1.03] shadow-[0_0_30px_rgba(139,92,246,0.4)]">
                         <span class="relative z-10 flex items-center justify-center gap-2">
-                            Je veux ma démo gratuite
-                            <i class="ph-bold ph-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                            Obtenir ma démo gratuite
+                            <i class="ph-bold ph-arrow-right group-hover:translate-x-1.5 transition-transform"></i>
                         </span>
                     </a>
-                    <a href="#services" class="px-8 py-4 glass border border-white/10 hover:border-cyber-blue/50 text-white font-medium text-lg rounded-lg w-full sm:w-auto text-center transition-all hover:bg-cyber-blue/10">
-                        Découvrir mes services
+                    <a href="#portfolio" class="px-8 py-4 glass border border-white/10 hover:border-cyber-violet/50 text-white font-medium text-lg rounded-lg w-full sm:w-auto text-center transition-all hover:bg-cyber-violet/10">
+                        Entrer dans le laboratoire
                     </a>
                 </div>
                 
-                <p class="mt-8 text-sm text-cyber-cyan/70 font-display font-bold tracking-widest uppercase">
-                    Je crée tout ce que tu imagines. Littéralement. Et je te le montre en live.
+                <p id="hero-tagline" class="opacity-0 mt-10 text-xs text-cyber-purple/60 font-display font-bold tracking-[0.2em] uppercase">
+                    Architecture 100% sur mesure. Tout ce que vous imaginez est réalisable.
                 </p>
             </div>
         </section>
 
-        <!-- Phrase forte Banner -->
-        <div class="w-full bg-gradient-to-r from-cyber-blue to-cyber-cyan text-cyber-black py-3 overflow-hidden relative z-20 shadow-[0_0_30px_rgba(0,229,255,0.3)]">
-            <div class="flex whitespace-nowrap animate-[marquee_20s_linear_infinite] font-display font-bold text-xl uppercase tracking-wider">
-                <span class="mx-4">• Tout est 100 % sur mesure</span>
-                <span class="mx-4">• Pas de template, pas de limite</span>
-                <span class="mx-4">• Tu as une idée ? Je la réalise de A à Z</span>
-                <span class="mx-4">• Même si elle n’existe nulle part ailleurs</span>
-                <span class="mx-4">• Tout est 100 % sur mesure</span>
-                <span class="mx-4">• Pas de template, pas de limite</span>
-                <span class="mx-4">• Tu as une idée ? Je la réalise de A à Z</span>
-                <span class="mx-4">• Même si elle n’existe nulle part ailleurs</span>
+        <!-- Phrase forte Banner (Marquee) -->
+        <div class="w-full bg-gradient-to-r from-cyber-violet via-cyber-magenta to-cyber-violet text-white py-3.5 overflow-hidden relative z-20 shadow-[0_0_35px_rgba(139,92,246,0.25)] border-y border-white/10">
+            <div class="flex whitespace-nowrap animate-[marquee_24s_linear_infinite] font-display font-bold text-lg uppercase tracking-widest">
+                <span class="mx-6 select-none">• Architecture 100% sur mesure</span>
+                <span class="mx-6 select-none">• Zéro limite technique</span>
+                <span class="mx-6 select-none">• Vous imaginez, nous construisons</span>
+                <span class="mx-6 select-none">• Vitesse & Sécurité absolues</span>
+                <span class="mx-6 select-none">• Aucun template, code propriétaire</span>
+                <span class="mx-6 select-none">• Tout ce que vous souhaitez est possible</span>
+                <span class="mx-6 select-none">• Architecture 100% sur mesure</span>
+                <span class="mx-6 select-none">• Zéro limite technique</span>
+                <span class="mx-6 select-none">• Vous imaginez, nous construisons</span>
+                <span class="mx-6 select-none">• Vitesse & Sécurité absolues</span>
             </div>
         </div>
 
@@ -216,246 +412,307 @@
         </style>
 
         <!-- ABOUT SECTION -->
-        <section id="about" class="py-24 relative">
+        <section id="about" class="py-32 relative">
             <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
                 <div class="gs-reveal order-2 md:order-1 relative">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-cyber-blue/20 to-transparent blur-3xl rounded-full"></div>
-                    <div class="glass-card rounded-2xl p-8 relative z-10 border-l-4 border-l-cyber-cyan">
-                        <i class="ph-duotone ph-cpu text-6xl text-cyber-cyan mb-6 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]"></i>
+                    <div class="absolute inset-0 bg-gradient-to-tr from-cyber-violet/20 to-transparent blur-3xl rounded-full"></div>
+                    <div class="glass-card rounded-2xl p-8 md:p-10 relative z-10 border-l-4 border-l-cyber-violet">
+                        <i class="ph-duotone ph-cpu text-6xl text-cyber-purple mb-6 drop-shadow-[0_0_15px_rgba(139,92,246,0.4)] animate-pulse"></i>
                         <p class="text-lg leading-relaxed text-gray-300">
-                            Développeur full-stack spécialisé trading & communauté Telegram. Je ne fais pas que des bots : <strong class="text-white">je crée des solutions complètes, privées, uniques et ultra-personnalisées.</strong>
+                            Kitsun System est un studio d'ingénierie logicielle d'élite. Nous concevons vos <strong class="text-white">applications web complexes, serveurs API, scripts d'automatisation sur mesure</strong>, ainsi que vos infrastructures de trading et systèmes communautaires Telegram.
                         </p>
                         <p class="text-lg leading-relaxed text-gray-300 mt-4">
-                            Tout est sur mesure, avec prix et plans adaptés à tes besoins. Pas de template, pas de limite.
+                            Chaque ligne de code est écrite spécifiquement pour répondre à vos exigences logiques et de performance. Nous n'avons aucune limite technologique : si vous pouvez l'imaginer, nous pouvons le coder.
                         </p>
                     </div>
                 </div>
                 <div class="gs-reveal order-1 md:order-2">
-                    <h2 class="text-sm font-bold text-cyber-cyan tracking-widest uppercase mb-3 font-display">Qui suis-je ?</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6 text-glow-blue uppercase">L'architecte de tes systèmes.</h3>
+                    <h2 class="text-sm font-bold text-cyber-purple tracking-widest uppercase mb-3 font-display">// L'ESPRIT KITSUN</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-6 text-glow-violet uppercase tracking-tight">L'architecte de vos solutions sur mesure.</h3>
                     <p class="text-gray-400 mb-8 text-lg">
-                        Si tu cherches un script basique copié-collé, tu n'es pas au bon endroit. Si tu cherches à construire ton propre écosystème, ton SaaS, ton bot surpuissant ou ton automatisation parfaite... on va bien s'entendre.
+                        Si vous cherchez un template basique, vous n'êtes pas à la bonne adresse. Si vous voulez créer votre propre infrastructure logicielle propriétaire, automatiser des workflows complexes ou connecter vos systèmes critiques... Nous sommes là pour ça.
                     </p>
                     <ul class="space-y-4 font-medium">
-                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-cyan text-xl drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]"></i> Code propriétaire & sécurisé</li>
-                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-cyan text-xl drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]"></i> Architecture pensée pour scaler</li>
-                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-cyan text-xl drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]"></i> Transparence totale</li>
+                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-purple text-xl drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]"></i> Propriété exclusive du code source</li>
+                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-purple text-xl drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]"></i> Micro-services scalables & Cloud haute performance</li>
+                        <li class="flex items-center gap-3 text-gray-200"><i class="ph-fill ph-check-circle text-cyber-purple text-xl drop-shadow-[0_0_8px_rgba(139,92,246,0.6)]"></i> Transparence et démonstration live avant facturation</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <!-- SERVICES SECTION -->
-        <section id="services" class="py-24 relative bg-black/40 border-y border-white/5">
+        <section id="services" class="py-32 relative bg-black/30 border-y border-white/5">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16 gs-reveal">
-                    <h2 class="text-sm font-bold text-cyber-blue tracking-widest uppercase mb-3 font-display">Expertises</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold mb-4 uppercase">Mes Services</h3>
-                    <p class="text-gray-400 max-w-2xl mx-auto text-lg">Chaque solution est architecturée from scratch pour répondre exactement à ton cahier des charges.</p>
+                <div class="text-center mb-24 gs-reveal">
+                    <h2 class="text-sm font-bold text-cyber-violet tracking-widest uppercase mb-3 font-display">// EXPERTISES LOGICIELLES</h2>
+                    <h3 class="text-4xl md:text-6xl font-display font-bold mb-4 uppercase tracking-tight text-glow-violet">Tout est possible. Sans limite.</h3>
+                    <p class="text-gray-400 max-w-2xl mx-auto text-lg">
+                        Nous concevons des solutions logicielles robustes et scalables, divisées en deux pôles d'excellence. La seule limite est votre imagination.
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Les services restent identiques au texte original -->
-                    <div class="tilt-card glass-card p-8 rounded-xl lg:col-span-2 relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-40 h-40 bg-cyber-blue/10 rounded-full blur-3xl group-hover:bg-cyber-cyan/20 transition-all"></div>
-                        <i class="ph-duotone ph-paper-plane-tilt text-5xl text-cyber-cyan mb-6 relative z-10 drop-shadow-[0_0_15px_rgba(0,229,255,0.5)]"></i>
-                        <h4 class="text-2xl font-display font-bold mb-4 relative z-10">1. Bots Telegram <span class="text-xs align-top bg-cyber-cyan/20 text-cyber-cyan px-2 py-1 rounded ml-2 uppercase tracking-wide border border-cyber-cyan/30">La star</span></h4>
-                        <ul class="space-y-3 text-gray-300 relative z-10">
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Bot de Trading Auto</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Bot de Copy Trading (capable de créer un SaaS privé unique pour toi)</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Bot d’Envoi de Signaux (zéro retard, zéro oubli)</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Bot d’Accueil Personnalisé</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Bot de Gestion Communautaire + Interface de gestion auto</li>
-                        </ul>
+                <!-- 1. DÉVELOPPEMENT LOGICIEL GENERAL (PRINCIPAL) -->
+                <div class="mb-20 gs-reveal">
+                    <div class="flex items-center gap-4 mb-10 border-b border-cyber-violet/20 pb-4">
+                        <span class="w-3 h-3 rounded-full bg-cyber-violet shadow-[0_0_10px_#8b5cf6]"></span>
+                        <h4 class="text-2xl font-display font-bold uppercase tracking-wider text-white">I. Pôle Développement Logiciel & Cloud (Principal)</h4>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Web & Infrastructure -->
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                            <div class="card-glow-spotlight"></div>
+                            <i class="ph-duotone ph-browsers text-5xl text-cyber-purple mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(167,139,250,0.3)]"></i>
+                            <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">1. Web & Infrastructure</h5>
+                            <ul class="space-y-3.5 text-gray-300 relative z-10 text-sm font-light">
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span>Interfaces web haut de gamme (Dashboards admin et portails clients).</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span>Développement de serveurs API robustes (NodeJS/Python) et bases de données rapides.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span>Intégration d'intelligence artificielle pour analyser ou résumer vos données.</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Automatisations Custom -->
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                            <div class="card-glow-spotlight"></div>
+                            <i class="ph-duotone ph-plugs text-5xl text-purple-400 mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(192,132,252,0.3)]"></i>
+                            <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">2. Automatisations Custom</h5>
+                            <ul class="space-y-3.5 text-gray-300 relative z-10 text-sm font-light">
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-purple-400 mt-1 shrink-0"></i> <span>Développement de scripts d'automatisation de tâches répétitives.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-purple-400 mt-1 shrink-0"></i> <span>Connecteurs d'API tiers et synchronisation de données multi-plateformes.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-purple-400 mt-1 shrink-0"></i> <span>Scraping éthique et alertes de prix personnalisées instantanées.</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- Infra & Cyber-Sécurité -->
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                            <div class="card-glow-spotlight"></div>
+                            <i class="ph-duotone ph-shield-check text-5xl text-cyber-violet mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]"></i>
+                            <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">3. Infra & Cyber-Sécurité</h5>
+                            <ul class="space-y-3.5 text-gray-300 relative z-10 text-sm font-light">
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-violet mt-1 shrink-0"></i> <span>Serveurs VPS dédiés optimisés avec protection anti-DDoS et haute disponibilité.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-violet mt-1 shrink-0"></i> <span>Chiffrement AES des bases de données et des communications API.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-violet mt-1 shrink-0"></i> <span>Monitoring d'activité et alertes de panne automatiques 24h/24 et 7j/7.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. TRADING & AUTOMATISATIONS -->
+                <div class="gs-reveal">
+                    <div class="flex items-center gap-4 mb-10 border-b border-cyber-magenta/20 pb-4">
+                        <span class="w-3 h-3 rounded-full bg-cyber-magenta shadow-[0_0_10px_#d946ef]"></span>
+                        <h4 class="text-2xl font-display font-bold uppercase tracking-wider text-white">II. Pôle Automatisation Trading</h4>
                     </div>
 
-                    <div class="tilt-card glass-card p-8 rounded-xl relative overflow-hidden group">
-                        <i class="ph-duotone ph-trend-up text-5xl text-cyber-blue mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-display font-bold mb-4 relative z-10">2. Trading & Automatisation</h4>
-                        <ul class="space-y-3 text-gray-300 relative z-10 text-sm">
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-blue mt-1"></i> Stratégies Automatisées MT5</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-blue mt-1"></i> Liaison Telegram ↔ MT5 temps réel</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-blue mt-1"></i> Gestion des Risques Automatisée (SL/TP, SL BE, money management intelligent)</li>
-                        </ul>
-                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Bots Telegram VIP & SaaS -->
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                            <div class="card-glow-spotlight"></div>
+                            <div class="absolute top-0 right-0 w-60 h-60 bg-cyber-violet/5 rounded-full blur-3xl group-hover:bg-cyber-magenta/15 transition-all"></div>
+                            <i class="ph-duotone ph-paper-plane-tilt text-6xl text-cyber-purple mb-6 relative z-10 drop-shadow-[0_0_15px_rgba(139,92,246,0.4)]"></i>
+                            <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">1. Bots Telegram & SaaS</h5>
+                            <ul class="space-y-3.5 text-gray-300 relative z-10 text-sm font-light">
+                                <li class="flex items-start gap-2.5"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span><strong>Bots de Trading Auto :</strong> Connexion de vos signaux à des comptes de trading.</span></li>
+                                <li class="flex items-start gap-2.5"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span><strong>Bots de Copy Trading :</strong> Duplication de comptes maîtres vers vos abonnés via un SaaS privé.</span></li>
+                                <li class="flex items-start gap-2.5"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span><strong>Distribution de Signaux :</strong> Envoi automatisé sans latence avec analyses graphiques.</span></li>
+                                <li class="flex items-start gap-2.5"><i class="ph-bold ph-caret-right text-cyber-purple mt-1 shrink-0"></i> <span><strong>Gestion d'abonnements :</strong> Paywalls crypto/stripe, gestion de salons VIP et expirations automatiques.</span></li>
+                            </ul>
+                        </div>
 
-                    <div class="tilt-card glass-card p-8 rounded-xl relative overflow-hidden group">
-                        <i class="ph-duotone ph-browsers text-5xl text-white mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-display font-bold mb-4 relative z-10">3. Web & Backend</h4>
-                        <ul class="space-y-3 text-gray-300 relative z-10 text-sm">
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-white mt-1"></i> Sites vitrine premium</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-white mt-1"></i> Dashboards de gestion & reporting</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-white mt-1"></i> Backends complets (API, BDD)</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-white mt-1"></i> Intégrations IA (chatbots, analyse)</li>
-                        </ul>
-                    </div>
-
-                    <div class="tilt-card glass-card p-8 rounded-xl relative overflow-hidden group">
-                        <i class="ph-duotone ph-plugs text-5xl text-purple-400 mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-display font-bold mb-4 relative z-10">4. Automatisations</h4>
-                        <ul class="space-y-3 text-gray-300 relative z-10 text-sm">
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-purple-400 mt-1"></i> Scripts (semi) automatiques</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-purple-400 mt-1"></i> Connecteurs multi-plateformes</li>
-                        </ul>
-                    </div>
-
-                    <div class="tilt-card glass-card p-8 rounded-xl relative overflow-hidden group">
-                        <i class="ph-duotone ph-shield-check text-5xl text-cyber-cyan mb-6 relative z-10"></i>
-                        <h4 class="text-xl font-display font-bold mb-4 relative z-10">5. Infra & Sécurité</h4>
-                        <ul class="space-y-3 text-gray-300 relative z-10 text-sm">
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Serveurs dédiés haute perf</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Sécurité avancée (cryptage)</li>
-                            <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-cyan mt-1"></i> Monitoring 24/7 & maintenance</li>
-                        </ul>
+                        <!-- Trading & MT5 -->
+                        <div class="tilt-card glass-card p-8 md:p-10 rounded-2xl relative overflow-hidden group card-glow-wrapper">
+                            <div class="card-glow-spotlight"></div>
+                            <i class="ph-duotone ph-trend-up text-5xl text-cyber-magenta mb-6 relative z-10 drop-shadow-[0_0_10px_rgba(217,70,239,0.3)]"></i>
+                            <h5 class="text-xl font-display font-bold mb-4 relative z-10 text-white">2. Trading & MT5</h5>
+                            <ul class="space-y-3.5 text-gray-300 relative z-10 text-sm font-light">
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-magenta mt-1 shrink-0"></i> <span>Expertise MQL5 et Python pour automatiser vos indicateurs TradingView/MT5.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-magenta mt-1 shrink-0"></i> <span>Liaison instantanée bidirectionnelle Telegram ↔ MT5 / MT4 / CTrader.</span></li>
+                                <li class="flex items-start gap-2"><i class="ph-bold ph-caret-right text-cyber-magenta mt-1 shrink-0"></i> <span>Gestionnaire de risque algorithmique (Breakeven, partial TP, max Drawdown).</span></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- DEMO SECTION -->
-        <section id="demo" class="py-32 relative overflow-hidden">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-cyber-blue/10 blur-[200px] rounded-full z-0 pointer-events-none"></div>
+        <!-- PORTFOLIO / CONFIGURATOR SECTION -->
+        <section id="portfolio" class="py-32 relative bg-black">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="mb-20 gs-reveal text-center">
+                    <h2 class="text-sm font-bold text-cyber-purple tracking-widest uppercase mb-3 font-display">// SIMULATEUR D'ARCHITECTURE</h2>
+                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase text-white tracking-tight">Configurez Votre Système Sur Mesure</h3>
+                    <p class="text-gray-400 mt-4">Cochez les briques technologiques souhaitées et observez l'infrastructure réseau se connecter en direct.</p>
+                </div>
 
-            <div class="max-w-5xl mx-auto px-6 relative z-10">
-                <div class="glass border border-cyber-cyan/50 rounded-3xl p-8 md:p-16 text-center shadow-[0_0_80px_rgba(0,229,255,0.15)] gs-reveal">
-                    
-                    <h2 class="text-4xl md:text-7xl font-display font-bold mb-6 text-glow-cyan uppercase">Teste-moi avant de payer</h2>
-                    <div class="inline-block px-6 py-2 rounded-full bg-cyber-cyan/20 text-cyber-cyan font-bold tracking-widest uppercase text-xl mb-10 border border-cyber-cyan/50 shadow-[0_0_20px_rgba(0,229,255,0.3)]">
-                        — 100 % gratuit —
+                <div class="grid lg:grid-cols-12 gap-10 items-start">
+                    <!-- Left: Control Panel Checkboxes -->
+                    <div class="lg:col-span-5 flex flex-col gap-6 gs-reveal">
+                        <!-- Group 1: Core components -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 space-y-4">
+                            <h4 class="text-sm font-bold text-cyber-purple font-display uppercase tracking-widest border-b border-white/5 pb-2">// 1. Cœur du Système</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="web">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Web & Dashboard</span>
+                                        <span class="text-xs text-gray-400 font-light">Interfaces d'administration & portails clients</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="telegram">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Bot Telegram VIP</span>
+                                        <span class="text-xs text-gray-400 font-light">Distribution de signaux et automatisations chat</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="mt5">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Passerelle Trading MT5</span>
+                                        <span class="text-xs text-gray-400 font-light">Exécution et réplication d'ordres en direct</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="script">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Scripts d'Automatisation</span>
+                                        <span class="text-xs text-gray-400 font-light">Calculs de fond, API privées et scripts custom</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Group 2: Integration components -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 space-y-4">
+                            <h4 class="text-sm font-bold text-cyber-magenta font-display uppercase tracking-widest border-b border-white/5 pb-2">// 2. Intégrations & Sécurité</h4>
+                            <div class="space-y-3">
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="db">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">PostgreSQL / Base SQL</span>
+                                        <span class="text-xs text-gray-400 font-light">Stockage sécurisé, structuré et performant</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="pay">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Paywall Stripe & Crypto</span>
+                                        <span class="text-xs text-gray-400 font-light">Facturation stripe et paiements cryptomonnaies</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="ai">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Intelligence Artificielle</span>
+                                        <span class="text-xs text-gray-400 font-light">Rapports IA, analyses et traitement LLM</span>
+                                    </div>
+                                </label>
+                                <label class="flex items-center gap-4 p-4 rounded-xl border border-white/5 bg-white/5 hover:bg-cyber-violet/5 hover:border-cyber-violet/30 cursor-pointer transition-all">
+                                    <input type="checkbox" checked class="config-checkbox w-5 h-5 accent-cyber-violet rounded" data-opt="vps">
+                                    <div class="flex flex-col">
+                                        <span class="text-sm font-bold text-white uppercase font-display">Hébergement VPS Sécurisé</span>
+                                        <span class="text-xs text-gray-400 font-light">Infrastructures cloud optimisées haute perf</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-medium">
-                        Tu as une idée de bot, de fonctionnalité ou de système sur mesure ?
-                    </p>
 
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mb-12">
-                        <div class="p-5 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-lg">
-                            <div class="w-8 h-8 rounded-full bg-cyber-blue text-white flex items-center justify-center font-bold shrink-0">1</div>
-                            <p class="text-gray-300">Tu me contactes sur Telegram.</p>
+                    <!-- Right: Visualizer & Info panel -->
+                    <div class="lg:col-span-7 flex flex-col gap-6 gs-reveal">
+                        <!-- SVG Node Visualizer -->
+                        <div class="glass-card p-6 rounded-2xl border border-white/5">
+                            <div class="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
+                                <span class="text-xs font-mono text-cyber-purple font-bold">// SCHÉMA D'ARCHITECTURE EN DIRECT</span>
+                                <span class="flex items-center gap-2 text-[10px] text-green-400 font-bold uppercase"><span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> Actif</span>
+                            </div>
+                            <svg viewBox="0 0 500 340" class="w-full h-auto bg-[#04010a] rounded-xl border border-white/5 p-4 shadow-inner relative overflow-hidden">
+                                <defs>
+                                    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+                                        <stop offset="0%" stop-color="#d946ef" stop-opacity="0.3" />
+                                        <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
+                                    </radialGradient>
+                                    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="4" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+                                <rect width="100%" height="100%" fill="none" opacity="0.03" stroke="#8b5cf6" stroke-width="0.5" stroke-dasharray="12 12" />
+                                
+                                <!-- Connection Lines -->
+                                <line id="link-web" x1="250" y1="170" x2="380" y2="170" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-telegram" x1="250" y1="170" x2="342" y2="262" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-mt5" x1="250" y1="170" x2="250" y2="300" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-script" x1="250" y1="170" x2="158" y2="262" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-db" x1="250" y1="170" x2="120" y2="170" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-pay" x1="250" y1="170" x2="158" y2="78" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-ai" x1="250" y1="170" x2="250" y2="40" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+                                <line id="link-vps" x1="250" y1="170" x2="342" y2="78" stroke="#1e1135" stroke-width="2" opacity="0.2" class="transition-all duration-300" />
+
+                                <!-- Central Core Node -->
+                                <circle cx="250" cy="170" r="42" fill="url(#centerGlow)" filter="url(#glow)" />
+                                <circle cx="250" cy="170" r="30" fill="#080314" stroke="#8b5cf6" stroke-width="2.5" />
+                                <text x="250" y="174" fill="#ffffff" font-size="11" font-family="Rajdhani" font-weight="bold" text-anchor="middle" letter-spacing="1">KITSUN</text>
+
+                                <!-- Nodes and Labels -->
+                                <circle id="node-web" cx="380" cy="170" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="380" y="173" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">WEB</text>
+                                <text x="404" y="173" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="start">Web Dashboard</text>
+
+                                <circle id="node-telegram" cx="342" cy="262" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="342" y="265" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">TG</text>
+                                <text x="342" y="293" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle">Telegram API</text>
+
+                                <circle id="node-mt5" cx="250" cy="300" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="250" y="303" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">MT5</text>
+                                <text x="250" y="328" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle">MetaTrader 5</text>
+
+                                <circle id="node-script" cx="158" cy="262" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="158" y="265" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">API</text>
+                                <text x="158" y="293" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle">Scripts/API</text>
+
+                                <circle id="node-db" cx="120" cy="170" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="120" y="173" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">DB</text>
+                                <text x="96" y="173" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="end">PostgreSQL</text>
+
+                                <circle id="node-pay" cx="158" cy="78" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="158" y="81" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">PAY</text>
+                                <text x="158" y="52" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle">Stripe/Crypto</text>
+
+                                <circle id="node-ai" cx="250" cy="40" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="250" y="43" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">AI</text>
+                                <text x="250" y="14" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle">IA GPT / Analyses</text>
+
+                                <circle id="node-vps" cx="342" cy="78" r="16" fill="#070212" stroke="#1e1135" stroke-width="2" class="transition-all duration-300" />
+                                <text x="342" y="81" fill="#ffffff" font-size="8" font-family="Fira Code" font-weight="bold" text-anchor="middle">VPS</text>
+                                <text x="342" y="52" fill="#a78bfa" font-size="10" font-family="Rajdhani" font-weight="semibold" text-anchor="middle"> VPS Cloud</text>
+                            </svg>
                         </div>
-                        <div class="p-5 rounded-xl bg-cyber-cyan/10 border border-cyber-cyan/30 flex gap-4 items-start shadow-[0_0_15px_rgba(0,229,255,0.2)]">
-                            <div class="w-8 h-8 rounded-full bg-cyber-cyan text-cyber-black flex items-center justify-center font-bold shrink-0">2</div>
-                            <p class="text-white font-bold">Je te crée la solution complète GRATUITEMENT.</p>
-                        </div>
-                        <div class="p-5 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-lg">
-                            <div class="w-8 h-8 rounded-full bg-cyber-blue text-white flex items-center justify-center font-bold shrink-0">3</div>
-                            <p class="text-gray-300">Je la teste en live devant toi.</p>
-                        </div>
-                        <div class="p-5 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-lg">
-                            <div class="w-8 h-8 rounded-full bg-cyber-blue text-white flex items-center justify-center font-bold shrink-0">4</div>
-                            <p class="text-gray-300">Tu vois tout fonctionner en conditions réelles.</p>
-                        </div>
-                        <div class="p-5 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-lg">
-                            <div class="w-8 h-8 rounded-full bg-cyber-blue text-white flex items-center justify-center font-bold shrink-0">5</div>
-                            <p class="text-gray-300">Si ça te plaît : on estime le prix ensemble.</p>
-                        </div>
-                        <div class="p-5 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-lg">
-                            <div class="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center font-bold shrink-0">6</div>
-                            <p class="text-gray-400">Si ça ne te plaît pas : zéro frais, zéro engagement.</p>
+
+                        <!-- Config Summary details -->
+                        <div class="glass p-6 rounded-2xl border border-white/5 space-y-6">
+                            <h4 class="text-lg font-display font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                                <i class="ph ph-sliders text-cyber-violet"></i> Récapitulatif d'Architecture
+                            </h4>
+                            <div class="space-y-4">
+                                <div id="config-desc" class="text-sm text-gray-300 leading-relaxed min-h-[50px] font-light">
+                                    Chargement des données...
+                                </div>
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between border-t border-white/5 pt-4 gap-4">
+                                    <span id="config-timeline" class="font-mono text-xs uppercase tracking-widest bg-cyber-violet/15 text-cyber-purple border border-cyber-violet/30 px-3 py-1.5 rounded-md font-bold">
+                                        Délai d'ingénierie : calcul...
+                                    </span>
+                                    <a id="config-tg-btn" href="https://t.me/ysestp" target="_blank" class="btn-glow px-6 py-3 bg-gradient-to-r from-cyber-violet to-cyber-magenta text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center justify-center gap-2">
+                                        <i class="ph ph-telegram-logo text-sm"></i> Envoyer ce projet sur Telegram
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                    <p class="text-xl text-cyber-cyan font-display font-bold mb-10 tracking-wide uppercase">
-                        "100 % de mes clients sont satisfaits et utilisent mes créations dans leurs canaux sans que leurs abonnés s’en rendent compte."
-                    </p>
-
-                    <a href="https://t.me/ysestp" target="_blank" class="btn-glow inline-block px-12 py-6 bg-cyber-cyan text-cyber-black font-display font-bold text-2xl rounded-xl uppercase tracking-wider transform transition hover:scale-105 shadow-[0_0_40px_rgba(0,229,255,0.5)]">
-                        Je veux ma démo gratuite maintenant
-                    </a>
                 </div>
             </div>
-        </section>
-
-        <!-- PORTFOLIO / MOCKUPS SECTION (INTERACTIVE) -->
-        <section id="portfolio" class="py-24 relative bg-black">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="mb-16 gs-reveal text-center">
-                    <h2 class="text-sm font-bold text-cyber-cyan tracking-widest uppercase mb-3 font-display">Laboratoire</h2>
-                    <h3 class="text-4xl md:text-5xl font-display font-bold uppercase">Aperçu en Live</h3>
-                    <p class="text-gray-400 mt-4">Clique sur les cartes pour ouvrir les démos interactives.</p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    
-                    <!-- Item 1 : Telegram Admin -->
-                    <div onclick="openModal('modal-telegram')" class="group relative rounded-2xl overflow-hidden glass border border-white/10 aspect-video cursor-pointer gs-reveal hover:border-cyber-blue transition-colors">
-                        <div class="absolute inset-0 bg-[#050a14] flex flex-col p-6 transition-transform duration-700 group-hover:scale-105">
-                            <div class="flex items-center gap-3 mb-4">
-                                <i class="ph-fill ph-telegram-logo text-blue-400 text-3xl drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"></i>
-                                <div>
-                                    <h4 class="font-bold text-lg font-display uppercase tracking-wide">Dashboard Admin Telegram</h4>
-                                    <p class="text-xs text-gray-400">Gestion complète de bot</p>
-                                </div>
-                            </div>
-                            <!-- Fausse UI -->
-                            <div class="flex-1 flex gap-4 mt-2">
-                                <div class="w-1/4 h-full bg-white/5 rounded-lg border border-white/5"></div>
-                                <div class="w-3/4 h-full flex flex-col gap-3">
-                                    <div class="h-12 bg-cyber-blue/20 rounded-lg border border-cyber-blue/30 flex items-center px-4">
-                                        <div class="w-2 h-2 rounded-full bg-cyber-cyan animate-pulse mr-2"></div><span class="text-xs text-cyber-cyan">Live Data</span>
-                                    </div>
-                                    <div class="flex-1 bg-white/5 rounded-lg border border-white/5 flex items-center justify-center">
-                                        <i class="ph-duotone ph-chart-bar text-4xl text-gray-500"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0 bg-cyber-black/80 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition-all duration-300 flex flex-col items-center justify-center">
-                            <i class="ph-fill ph-cursor-click text-4xl text-cyber-cyan mb-2"></i>
-                            <span class="text-cyber-cyan font-bold font-display uppercase tracking-widest">Ouvrir l'interface</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 2 : MT5 Sync -->
-                    <div onclick="openModal('modal-mt5')" class="group relative rounded-2xl overflow-hidden glass border border-white/10 aspect-video cursor-pointer gs-reveal hover:border-cyber-cyan transition-colors" style="transition-delay: 100ms;">
-                        <div class="absolute inset-0 bg-[#050a14] flex flex-col p-6 transition-transform duration-700 group-hover:scale-105">
-                            <div class="flex items-center gap-3 mb-4">
-                                <i class="ph-fill ph-trend-up text-cyber-cyan text-3xl drop-shadow-[0_0_10px_rgba(0,229,255,0.8)]"></i>
-                                <div>
-                                    <h4 class="font-bold text-lg font-display uppercase tracking-wide">Flux Telegram ↔ MT5</h4>
-                                    <p class="text-xs text-gray-400">Automatisation bidirectionnelle</p>
-                                </div>
-                            </div>
-                            <div class="flex-1 flex items-center justify-center gap-4">
-                                <div class="w-12 h-12 bg-blue-500/20 rounded-xl border border-blue-500/50 flex items-center justify-center"><i class="ph-fill ph-telegram-logo text-blue-400 text-2xl"></i></div>
-                                <div class="flex-1 h-px bg-gradient-to-r from-blue-500 via-cyber-cyan to-orange-500 relative">
-                                    <div class="absolute w-full h-full bg-white/20 blur-sm"></div>
-                                </div>
-                                <div class="w-12 h-12 bg-orange-500/20 rounded-xl border border-orange-500/50 flex items-center justify-center"><span class="font-bold text-orange-400 text-xs">MT5</span></div>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0 bg-cyber-black/80 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition-all duration-300 flex flex-col items-center justify-center">
-                            <i class="ph-fill ph-play-circle text-4xl text-cyber-cyan mb-2"></i>
-                            <span class="text-cyber-cyan font-bold font-display uppercase tracking-widest">Voir l'animation</span>
-                        </div>
-                    </div>
-
-                    <!-- Item 3 : SaaS -->
-                    <div onclick="openModal('modal-saas')" class="group relative rounded-2xl overflow-hidden glass border border-white/10 aspect-video cursor-pointer gs-reveal hover:border-white/50 transition-colors" style="transition-delay: 200ms;">
-                        <div class="absolute inset-0 bg-[#050a14] flex flex-col p-6 transition-transform duration-700 group-hover:scale-105">
-                            <div class="flex items-center gap-3 mb-4">
-                                <i class="ph-fill ph-globe-hemisphere-west text-white text-3xl drop-shadow-[0_0_10px_rgba(255,255,255,0.8)]"></i>
-                                <div>
-                                    <h4 class="font-bold text-lg font-display uppercase tracking-wide">SaaS Privé & Backend</h4>
-                                    <p class="text-xs text-gray-400">Front & Back en temps réel</p>
-                                </div>
-                            </div>
-                            <div class="flex-1 flex flex-col gap-2 mt-2">
-                                <div class="w-full h-6 bg-white/10 rounded border border-white/10"></div>
-                                <div class="w-full flex-1 grid grid-cols-2 gap-2">
-                                    <div class="bg-white/5 rounded border border-white/5"></div>
-                                    <div class="bg-black/50 rounded border border-green-500/30 p-2 overflow-hidden">
-                                        <div class="w-full h-2 bg-green-500/20 mb-1"></div>
-                                        <div class="w-3/4 h-2 bg-green-500/20 mb-1"></div>
-                                        <div class="w-5/6 h-2 bg-green-500/20"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute inset-0 bg-cyber-black/80 opacity-0 group-hover:opacity-100 backdrop-blur-sm transition-all duration-300 flex flex-col items-center justify-center">
-                            <i class="ph-fill ph-terminal-window text-4xl text-white mb-2"></i>
-                            <span class="text-white font-bold font-display uppercase tracking-widest">Tester le SaaS</span>
-                        </div>
+        </section>      </div>
                     </div>
 
                 </div>
@@ -463,35 +720,89 @@
         </section>
 
         <!-- WHY CHOOSE US -->
-        <section class="py-24 relative border-t border-white/5">
+        <section class="py-32 relative border-t border-white/5 bg-cyber-dark/40">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16 gs-reveal">
-                    <h3 class="text-3xl font-display font-bold uppercase tracking-wider">Pourquoi YSE DEV ?</h3>
+                <div class="text-center mb-20 gs-reveal">
+                    <h3 class="text-3xl md:text-4xl font-display font-bold uppercase tracking-wider text-white">Pourquoi Choisir Kitsun System ?</h3>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="gs-reveal text-center glass p-6 rounded-2xl hover:-translate-y-2 transition-transform border border-white/5">
-                        <i class="ph-fill ph-rocket-launch text-5xl text-cyber-blue mb-4"></i>
-                        <h4 class="text-xl font-bold mb-3 text-white font-display">Création ultra-rapide</h4>
-                        <p class="text-gray-400 text-sm">Une solution complète (SaaS privé) déployée dès 2 semaines from scratch.</p>
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5">
+                        <i class="ph-fill ph-rocket-launch text-5xl text-cyber-violet mb-4 drop-shadow-[0_0_10px_rgba(139,92,246,0.3)]"></i>
+                        <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Livraison Rapide</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Une architecture complète et un SaaS de copy trading privé opérationnel sous 15 jours.</p>
                     </div>
                     
-                    <div class="gs-reveal text-center glass p-6 rounded-2xl hover:-translate-y-2 transition-transform border border-white/5" style="transition-delay: 100ms;">
-                        <i class="ph-fill ph-users-three text-5xl text-cyber-cyan mb-4"></i>
-                        <h4 class="text-xl font-bold mb-3 text-white font-display">Équipe d'experts</h4>
-                        <p class="text-gray-400 text-sm">Travail en synergie avec des développeurs experts pour une qualité et vitesse maximale.</p>
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 100ms;">
+                        <i class="ph-fill ph-users-three text-5xl text-cyber-purple mb-4 drop-shadow-[0_0_10px_rgba(167,139,250,0.3)]"></i>
+                        <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Équipe d'Élite</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Ingénieurs passionnés assurant des structures hautement optimisées et robustes.</p>
                     </div>
 
-                    <div class="gs-reveal text-center glass p-6 rounded-2xl hover:-translate-y-2 transition-transform border border-white/5" style="transition-delay: 200ms;">
-                        <i class="ph-fill ph-strategy text-5xl text-purple-400 mb-4"></i>
-                        <h4 class="text-xl font-bold mb-3 text-white font-display">Accompagnement</h4>
-                        <p class="text-gray-400 text-sm">Accompagnement stratégique + support réactif pour faire exploser tes résultats.</p>
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 200ms;">
+                        <i class="ph-fill ph-strategy text-5xl text-cyber-magenta mb-4 drop-shadow-[0_0_10px_rgba(217,70,239,0.3)]"></i>
+                        <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Support Réactif</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Assistance et monitoring 24/7 de vos serveurs pour une tranquillité absolue.</p>
                     </div>
 
-                    <div class="gs-reveal text-center glass p-6 rounded-2xl hover:-translate-y-2 transition-transform border border-white/5" style="transition-delay: 300ms;">
-                        <i class="ph-fill ph-infinity text-5xl text-yellow-400 mb-4"></i>
-                        <h4 class="text-xl font-bold mb-3 text-white font-display">Flexibilité totale</h4>
-                        <p class="text-gray-400 text-sm">Évolution continue. Tu imagines une feature, je l'intègre. Sans friction.</p>
+                    <div class="gs-reveal text-center glass p-8 rounded-2xl hover:-translate-y-2 transition-all duration-300 border border-white/5" style="transition-delay: 300ms;">
+                        <i class="ph-fill ph-infinity text-5xl text-yellow-400 mb-4 drop-shadow-[0_0_10px_rgba(250,204,21,0.3)]"></i>
+                        <h4 class="text-xl font-bold mb-3 text-white font-display uppercase">Scalabilité</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed">Possibilité d'ajouter des indicateurs ou des fonctionnalités sur demande à tout moment.</p>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEMO SECTION -->
+        <section id="demo" class="py-32 relative overflow-hidden">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-cyber-violet/10 blur-[220px] rounded-full z-0 pointer-events-none"></div>
+
+            <div class="max-w-5xl mx-auto px-6 relative z-10">
+                <div class="glass border border-cyber-violet/40 rounded-3xl p-8 md:p-16 text-center shadow-[0_0_80px_rgba(139,92,246,0.15)] gs-reveal">
+                    
+                    <h2 class="text-4xl md:text-6xl font-display font-bold mb-6 text-glow-violet uppercase text-white tracking-tight">Testez-nous avant de payer</h2>
+                    <div class="inline-block px-6 py-2 rounded-full bg-cyber-magenta/15 text-cyber-magenta font-bold tracking-widest text-lg md:text-xl mb-12 border border-cyber-magenta/40 shadow-[0_0_20px_rgba(217,70,239,0.25)]">
+                        — 100% GRATUIT ET SANS ENGAGEMENT —
+                    </div>
+                    
+                    <p class="text-lg md:text-xl text-gray-300 mb-12 max-w-2xl mx-auto font-medium">
+                        Vous avez une idée de bot Telegram, de passerelle MT5 ou de SaaS complexe ?
+                    </p>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 text-left mb-14">
+                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">1</div>
+                            <p class="text-gray-300 text-sm">Vous nous décrivez votre projet sur Telegram.</p>
+                        </div>
+                        <div class="p-6 rounded-xl bg-cyber-violet/10 border border-cyber-violet/30 flex gap-4 items-start shadow-[0_0_15px_rgba(139,92,246,0.15)]">
+                            <div class="w-8 h-8 rounded-full bg-cyber-magenta text-white flex items-center justify-center font-bold shrink-0 font-mono">2</div>
+                            <p class="text-white font-bold text-sm">Nous concevons la solution gratuitement.</p>
+                        </div>
+                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">3</div>
+                            <p class="text-gray-300 text-sm">Nous organisons une démonstration en direct.</p>
+                        </div>
+                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">4</div>
+                            <p class="text-gray-300 text-sm">Vous observez le fonctionnement en temps réel.</p>
+                        </div>
+                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-cyber-violet text-white flex items-center justify-center font-bold shrink-0 font-mono">5</div>
+                            <p class="text-gray-300 text-sm">Si l'outil vous convient : nous validons l'estimation tarifaire.</p>
+                        </div>
+                        <div class="p-6 rounded-xl bg-white/5 border border-white/10 flex gap-4 items-start shadow-md">
+                            <div class="w-8 h-8 rounded-full bg-gray-600 text-white flex items-center justify-center font-bold shrink-0 font-mono">6</div>
+                            <p class="text-gray-400 text-sm">Si cela ne correspond pas : aucun frais, aucun contrat.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-lg md:text-xl text-cyber-purple font-display font-bold mb-10 tracking-wide uppercase">
+                        "La garantie de travailler avec un code fonctionnel sous vos yeux."
+                    </p>
+
+                    <a href="https://t.me/ysestp" target="_blank" class="btn-glow inline-block px-12 py-5 bg-gradient-to-r from-cyber-violet to-cyber-magenta text-white font-display font-bold text-xl md:text-2xl rounded-xl uppercase tracking-wider transform transition hover:scale-[1.03] shadow-[0_0_40px_rgba(139,92,246,0.4)]">
+                        Lancer mon projet sur Telegram
+                    </a>
                 </div>
             </div>
         </section>
@@ -499,219 +810,48 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="relative z-10 border-t border-white/10 bg-[#010204] pt-16 pb-8">
+    <footer class="relative z-10 border-t border-white/10 bg-[#010003] pt-16 pb-8">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-2">
-                <a href="#" class="text-3xl font-display font-bold text-white tracking-wider flex items-center gap-2 mb-4">
-                    <i class="ph-fill ph-hexagon text-cyber-cyan"></i> YSE <span class="text-cyber-cyan">DEV</span>
+                <a href="#" class="flex items-center gap-3 mb-6">
+                    <img src="logo.png" alt="Kitsun Logo" class="h-24 w-auto object-contain">
+                    <span class="text-2xl font-display font-bold text-white tracking-wider">
+                        KITSUN <span class="text-cyber-purple">SYSTEM</span>
+                    </span>
                 </a>
-                <p class="text-gray-400 max-w-sm mb-6">
-                    L'ingénierie logicielle premium au service des traders et des créateurs de communautés.
+                <p class="text-gray-400 max-w-sm mb-6 leading-relaxed text-sm">
+                    Infrastructures logicielles premium et bots de trading automatisés sur mesure pour traders d'élite.
                 </p>
             </div>
             
             <div>
-                <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm font-display">Navigation</h4>
-                <ul class="space-y-2">
-                    <li><a href="#services" class="text-gray-400 hover:text-cyber-cyan transition-colors text-sm">Services</a></li>
-                    <li><a href="#portfolio" class="text-gray-400 hover:text-cyber-cyan transition-colors text-sm">Réalisations</a></li>
-                    <li><a href="#demo" class="text-gray-400 hover:text-cyber-cyan transition-colors text-sm">Démo gratuite</a></li>
+                <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm font-display">// Navigation</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#about" class="text-gray-400 hover:text-cyber-purple transition-colors">Qui sommes-nous ?</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-cyber-purple transition-colors">Expertises</a></li>
+                    <li><a href="#portfolio" class="text-gray-400 hover:text-cyber-purple transition-colors">Simulateur</a></li>
                 </ul>
             </div>
 
             <div>
-                <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm font-display">Légal</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-400 hover:text-cyber-cyan transition-colors text-sm">Contact Telegram</a></li>
+                <h4 class="font-bold text-white mb-4 uppercase tracking-wider text-sm font-display">// Contact</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="https://t.me/ysestp" target="_blank" class="text-gray-400 hover:text-cyber-purple transition-colors flex items-center gap-2"><i class="ph-fill ph-paper-plane-tilt"></i> Telegram Officiel</a></li>
                 </ul>
             </div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-            <p>&copy; 2026 YSE DEV. Tous droits réservés.</p>
-            <p class="font-display font-bold text-gray-400 uppercase tracking-widest text-glow-cyan text-lg">Tu imagines. Je construis.</p>
+        <div class="max-w-7xl mx-auto px-6 border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-500">
+            <p>&copy; 2026 Kitsun System. Tous droits réservés.</p>
+            <p class="font-display font-bold text-cyber-purple uppercase tracking-widest text-glow-violet text-md">Vous imaginez. Kitsun construit.</p>
         </div>
     </footer>
 
 
-    <!-- ========================================== -->
-    <!-- MODALS SYSTEM (The Interactive Labs)       -->
-    <!-- ========================================== -->
-    
-    <!-- Modal Overlay Backdrop -->
-    <div id="modal-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-xl z-[100] hidden items-center justify-center p-4 transition-opacity opacity-0 duration-300">
-        
-        <!-- MODAL 1 : Telegram Dashboard -->
-        <div id="modal-telegram" class="hidden modal-content w-full max-w-5xl bg-[#0a0f18] rounded-2xl border border-cyber-blue/30 shadow-[0_0_50px_rgba(0,102,255,0.2)] flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-300">
-            <!-- Sidebar -->
-            <div class="w-full md:w-64 bg-[#050810] border-r border-white/5 p-4 flex flex-col">
-                <div class="flex items-center gap-2 mb-8 text-white font-display text-xl border-b border-white/5 pb-4">
-                    <i class="ph-fill ph-robot text-cyber-blue"></i> Bot Admin v2.4
-                </div>
-                <nav class="space-y-2 flex-1">
-                    <button class="w-full text-left px-4 py-3 rounded-lg bg-cyber-blue/10 text-cyber-blue border border-cyber-blue/20 flex items-center gap-3 font-medium text-sm">
-                        <i class="ph ph-users"></i> Abonnés (1,452)
-                    </button>
-                    <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 flex items-center gap-3 font-medium text-sm transition-colors">
-                        <i class="ph ph-paper-plane-tilt"></i> Broadcast
-                    </button>
-                    <button class="w-full text-left px-4 py-3 rounded-lg hover:bg-white/5 text-gray-400 flex items-center gap-3 font-medium text-sm transition-colors">
-                        <i class="ph ph-gear"></i> Paramètres Auto
-                    </button>
-                </nav>
-            </div>
-            <!-- Main Content -->
-            <div class="flex-1 p-6 flex flex-col">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-2xl font-display font-bold">Envoi de Signal Manuel</h3>
-                    <button onclick="closeModal()" class="text-gray-500 hover:text-white"><i class="ph ph-x text-2xl"></i></button>
-                </div>
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                    <div class="bg-white/5 p-4 rounded-xl border border-white/5">
-                        <div class="text-gray-400 text-xs mb-1 uppercase">Membres Actifs</div>
-                        <div class="text-2xl font-bold text-cyber-cyan">1,452</div>
-                    </div>
-                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 flex items-center justify-between">
-                        <div>
-                            <div class="text-gray-400 text-xs mb-1 uppercase">Auto-Approbation</div>
-                            <div class="text-lg font-bold text-white">Activée</div>
-                        </div>
-                        <div class="w-12 h-6 bg-cyber-blue rounded-full relative"><div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div></div>
-                    </div>
-                </div>
-                <div class="flex-1 bg-black/40 rounded-xl border border-white/5 p-4 flex flex-col">
-                    <textarea class="w-full bg-transparent border-none outline-none text-white resize-none h-32" placeholder="Tapez votre message ou signal de trading ici..."></textarea>
-                    <div class="border-t border-white/5 pt-4 mt-auto flex justify-between items-center">
-                        <div class="flex gap-2">
-                            <button class="p-2 bg-white/5 hover:bg-white/10 rounded text-gray-400"><i class="ph ph-image"></i></button>
-                            <button class="p-2 bg-white/5 hover:bg-white/10 rounded text-gray-400"><i class="ph ph-chart-line-up"></i></button>
-                        </div>
-                        <button onclick="fireTelegramToast()" class="bg-cyber-blue hover:bg-blue-500 text-white px-6 py-2 rounded-lg font-bold flex items-center gap-2 transition-colors">
-                            <i class="ph ph-paper-plane-right"></i> Envoyer à tous
-                        </button>
-                    </div>
-                </div>
-                <!-- Toast Notification -->
-                <div id="tg-toast" class="mt-4 bg-green-500/20 border border-green-500/50 text-green-400 px-4 py-3 rounded-lg flex items-center gap-3 opacity-0 transition-opacity">
-                    <i class="ph-fill ph-check-circle text-xl"></i>
-                    <span>Signal envoyé avec succès à 1,452 utilisateurs sur Telegram. Latence: 0.12s</span>
-                </div>
-            </div>
-        </div>
 
-        <!-- MODAL 2 : MT5 Sync -->
-        <div id="modal-mt5" class="hidden modal-content w-full max-w-4xl bg-[#0a0f18] rounded-2xl border border-cyber-cyan/30 shadow-[0_0_50px_rgba(0,229,255,0.2)] p-8 transform scale-95 transition-transform duration-300">
-            <div class="flex justify-between items-center mb-8">
-                <h3 class="text-2xl font-display font-bold uppercase text-cyber-cyan"><i class="ph-fill ph-arrows-left-right mr-2"></i> Sync Telegram ↔ MT5</h3>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-white"><i class="ph ph-x text-2xl"></i></button>
-            </div>
-            
-            <div class="flex flex-col md:flex-row items-center justify-between gap-8 py-10 relative">
-                <!-- Telegram Box -->
-                <div class="w-48 bg-[#050810] border border-blue-500/30 rounded-xl p-6 flex flex-col items-center text-center z-10 shadow-[0_0_20px_rgba(59,130,246,0.1)]">
-                    <i class="ph-fill ph-telegram-logo text-6xl text-blue-500 mb-4 drop-shadow-[0_0_10px_rgba(59,130,246,0.8)]"></i>
-                    <h4 class="font-bold text-white mb-1">Canal VIP</h4>
-                    <p class="text-xs text-gray-400">Signaux entrants / sortants</p>
-                </div>
-
-                <!-- Server / AI Middle -->
-                <div class="flex-1 flex flex-col items-center relative min-w-[200px] h-32 justify-center">
-                    <!-- Lines -->
-                    <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gray-800 -translate-y-1/2"></div>
-                    <div class="absolute top-1/2 left-0 w-full h-[2px] bg-gradient-to-r from-blue-500 via-cyber-cyan to-orange-500 opacity-50 -translate-y-1/2"></div>
-                    
-                    <!-- Flow Animations container -->
-                    <div id="mt5-flow-container" class="absolute top-1/2 left-0 w-full h-4 -translate-y-1/2 overflow-hidden"></div>
-
-                    <!-- Server Node -->
-                    <div class="w-20 h-20 bg-black border-2 border-cyber-cyan rounded-full flex items-center justify-center z-10 shadow-[0_0_30px_rgba(0,229,255,0.4)] relative">
-                        <i class="ph-duotone ph-cpu text-3xl text-cyber-cyan"></i>
-                        <div class="absolute inset-0 rounded-full border border-cyber-cyan animate-ping opacity-20"></div>
-                    </div>
-                    <span class="absolute -bottom-8 text-xs font-mono text-cyber-cyan bg-cyber-cyan/10 px-2 py-1 rounded">YSE.DEV Engine</span>
-                </div>
-
-                <!-- MT5 Box -->
-                <div class="w-48 bg-[#050810] border border-orange-500/30 rounded-xl p-6 flex flex-col items-center text-center z-10 shadow-[0_0_20px_rgba(249,115,22,0.1)]">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/MetaTrader_5_logo.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'none\' stroke=\'orange\' stroke-width=\'5\'/><text x=\'50\' y=\'55\' text-anchor=\'middle\' fill=\'orange\' font-size=\'20\' font-family=\'sans-serif\'>MT5</text></svg>'" class="w-16 h-16 object-contain mb-4 filter drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]" alt="MT5">
-                    <h4 class="font-bold text-white mb-1">Terminal MT5</h4>
-                    <p class="text-xs text-gray-400">Exécution Instantanée</p>
-                </div>
-            </div>
-
-            <div class="flex justify-center gap-4 mt-8">
-                <button onclick="triggerFlow('right')" class="px-6 py-3 bg-blue-600/20 hover:bg-blue-600/40 border border-blue-500 text-blue-400 rounded-lg font-bold transition-colors flex items-center gap-2">
-                    Signal Telegram <i class="ph-bold ph-arrow-right"></i> MT5
-                </button>
-                <button onclick="triggerFlow('left')" class="px-6 py-3 bg-orange-600/20 hover:bg-orange-600/40 border border-orange-500 text-orange-400 rounded-lg font-bold transition-colors flex items-center gap-2">
-                    Trade MT5 <i class="ph-bold ph-arrow-right"></i> Telegram
-                </button>
-            </div>
-            <div id="mt5-log" class="text-center text-sm font-mono text-gray-500 mt-4 h-6">En attente d'événement...</div>
-        </div>
-
-        <!-- MODAL 3 : SaaS Interface -->
-        <div id="modal-saas" class="hidden modal-content w-full max-w-6xl bg-[#03050a] rounded-2xl border border-white/10 shadow-2xl flex flex-col h-[80vh] overflow-hidden transform scale-95 transition-transform duration-300">
-            <!-- Header -->
-            <div class="h-16 border-b border-white/10 bg-[#050810] flex items-center justify-between px-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-8 h-8 bg-gradient-to-br from-cyber-blue to-cyber-cyan rounded flex items-center justify-center text-black font-bold">S</div>
-                    <span class="font-display font-bold text-lg tracking-widest">SaaS ADMINISTRATOR</span>
-                </div>
-                <button onclick="closeModal()" class="text-gray-500 hover:text-white"><i class="ph ph-x text-2xl"></i></button>
-            </div>
-            
-            <div class="flex-1 flex overflow-hidden">
-                <!-- Sidebar -->
-                <div class="w-64 border-r border-white/10 bg-[#050810] p-4">
-                    <div class="text-xs font-bold text-gray-500 mb-4 uppercase">Menu Principal</div>
-                    <button class="w-full text-left px-3 py-2 rounded bg-white/5 text-white mb-2 flex items-center gap-2"><i class="ph ph-squares-four text-cyber-cyan"></i> Vue d'ensemble</button>
-                    <button class="w-full text-left px-3 py-2 rounded hover:bg-white/5 text-gray-400 mb-2 flex items-center gap-2 transition-colors"><i class="ph ph-users"></i> Licences Clients</button>
-                    <button class="w-full text-left px-3 py-2 rounded hover:bg-white/5 text-gray-400 mb-2 flex items-center gap-2 transition-colors"><i class="ph ph-database"></i> Base de données</button>
-                </div>
-                
-                <!-- Main area -->
-                <div class="flex-1 flex flex-col bg-[#03050a]">
-                    <!-- Dashboard UI -->
-                    <div class="p-6 grid grid-cols-3 gap-6">
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-                            <div class="text-gray-400 text-sm mb-2">Requêtes API (24h)</div>
-                            <div class="text-3xl font-display font-bold text-white">124,592</div>
-                            <div class="text-green-400 text-sm mt-2 flex items-center gap-1"><i class="ph-bold ph-trend-up"></i> +12.5%</div>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-5">
-                            <div class="text-gray-400 text-sm mb-2">Latence Serveur</div>
-                            <div class="text-3xl font-display font-bold text-cyber-cyan">42 ms</div>
-                            <div class="text-gray-500 text-sm mt-2">Optimal</div>
-                        </div>
-                        <div class="bg-white/5 border border-white/10 rounded-xl p-5 flex flex-col justify-center">
-                            <button onclick="saasAction('RESTART_ENGINE')" class="w-full py-2 border border-cyber-blue text-cyber-blue hover:bg-cyber-blue hover:text-black rounded font-bold transition-colors mb-2">Redémarrer Engine</button>
-                            <button onclick="saasAction('CLEAR_CACHE')" class="w-full py-2 border border-gray-600 text-gray-400 hover:bg-gray-600 hover:text-white rounded font-bold transition-colors">Vider le Cache</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Fake Terminal Backend -->
-                    <div class="flex-1 bg-black border-t border-white/10 p-0 flex flex-col">
-                        <div class="bg-[#0f111a] px-4 py-2 text-xs font-mono text-gray-400 border-b border-white/10 flex gap-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
-                            <span class="ml-4 text-cyber-cyan">root@yse-server:~# tail -f /var/log/backend.log</span>
-                        </div>
-                        <div id="saas-terminal" class="p-4 flex-1 overflow-y-auto font-mono text-sm terminal-scroll bg-[#050810]">
-                            <p class="text-gray-500">["2024-10-27 14:00:00"] INFO: Server initialized on port 8080.</p>
-                            <p class="text-gray-500">["2024-10-27 14:00:01"] INFO: Database connected successfully.</p>
-                            <p class="text-green-400">["2024-10-27 14:00:02"] READY: System waiting for requests...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
 
     <!-- Scripts -->
-    <!-- GSAP -->
+    <!-- GSAP & ScrollTrigger -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <!-- Vanilla Tilt -->
@@ -722,127 +862,585 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             
-            // --- 1. Typing Effect (Hero) ---
-            const textToType = "YSE DEV";
-            const typewriterElement = document.getElementById("typewriter");
-            let i = 0;
-            function typeWriter() {
-                if (i < textToType.length) {
-                    typewriterElement.innerHTML += textToType.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 120);
+            // --- 1. WEB AUDIO API SYNTHESIZER (CINEMATIC SFX) ---
+            function playAccessSound() {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return;
+                    
+                    const ctx = window.audioCtx || new AudioContext();
+                    if (ctx.state === 'suspended') {
+                        ctx.resume();
+                    }
+                    
+                    const now = ctx.currentTime;
+                    
+                    // Master gain node
+                    const masterGain = ctx.createGain();
+                    masterGain.gain.setValueAtTime(0.001, now);
+                    masterGain.gain.exponentialRampToValueAtTime(0.65, now + 0.08);
+                    masterGain.gain.exponentialRampToValueAtTime(0.001, now + 2.4);
+                    masterGain.connect(ctx.destination);
+                    
+                    // Stereo Delay Node
+                    const delay = ctx.createDelay();
+                    delay.delayTime.value = 0.18;
+                    const feedback = ctx.createGain();
+                    feedback.gain.value = 0.4;
+                    
+                    // 1. Massive Sub-bass Cinematic Boom
+                    const subOsc = ctx.createOscillator();
+                    const subGain = ctx.createGain();
+                    subOsc.type = 'sine';
+                    subOsc.frequency.setValueAtTime(150, now);
+                    subOsc.frequency.exponentialRampToValueAtTime(28, now + 1.4);
+                    
+                    const subFilter = ctx.createBiquadFilter();
+                    subFilter.type = 'lowpass';
+                    subFilter.frequency.setValueAtTime(180, now);
+                    subFilter.frequency.exponentialRampToValueAtTime(40, now + 1.2);
+                    
+                    subGain.gain.setValueAtTime(0.8, now);
+                    subGain.gain.linearRampToValueAtTime(0.001, now + 1.5);
+                    
+                    subOsc.connect(subFilter);
+                    subFilter.connect(subGain);
+                    subGain.connect(masterGain);
+                    subOsc.start(now);
+                    subOsc.stop(now + 1.8);
+                    
+                    // 2. Futuristic Cyber Jet Ignition (Bandpass sweep)
+                    const noiseOsc = ctx.createOscillator();
+                    const noiseGain = ctx.createGain();
+                    noiseOsc.type = 'triangle';
+                    noiseOsc.frequency.setValueAtTime(800, now);
+                    noiseOsc.frequency.exponentialRampToValueAtTime(100, now + 0.9);
+                    
+                    const noiseFilter = ctx.createBiquadFilter();
+                    noiseFilter.type = 'bandpass';
+                    noiseFilter.Q.setValueAtTime(12, now);
+                    noiseFilter.frequency.setValueAtTime(3000, now);
+                    noiseFilter.frequency.exponentialRampToValueAtTime(250, now + 0.8);
+                    
+                    noiseGain.gain.setValueAtTime(0.4, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.001, now + 1.0);
+                    
+                    noiseOsc.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
+                    noiseGain.connect(masterGain);
+                    noiseOsc.start(now);
+                    noiseOsc.stop(now + 1.1);
+                    
+                    // 3. Glowing Cyber Chime (Eb major 9th chord: Eb4, G4, Bb4, D5, G5)
+                    const chimeFreqs = [311.13, 392.00, 466.16, 587.33, 783.99];
+                    chimeFreqs.forEach((freq, idx) => {
+                        const osc = ctx.createOscillator();
+                        const gain = ctx.createGain();
+                        osc.type = 'sine';
+                        osc.frequency.value = freq;
+                        
+                        const start = now + idx * 0.05;
+                        
+                        gain.gain.setValueAtTime(0.001, start);
+                        gain.gain.exponentialRampToValueAtTime(0.15, start + 0.06);
+                        gain.gain.exponentialRampToValueAtTime(0.001, start + 1.4);
+                        
+                        osc.connect(gain);
+                        gain.connect(masterGain);
+                        gain.connect(delay);
+                        
+                        osc.start(start);
+                        osc.stop(start + 1.6);
+                    });
+                    
+                    delay.connect(feedback);
+                    feedback.connect(delay);
+                    delay.connect(masterGain);
+                    
+                } catch (e) {
+                    console.error("Audio synthesis failed:", e);
                 }
             }
-            setTimeout(typeWriter, 500);
 
-            // --- 2. GSAP Animations ---
+            // click feedback sound helper
+            function playClickSound() {
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    if (!AudioContext) return;
+                    
+                    const ctx = window.audioCtx || new AudioContext();
+                    if (ctx.state === 'suspended') {
+                        ctx.resume();
+                    }
+                    
+                    const now = ctx.currentTime;
+                    const osc = ctx.createOscillator();
+                    const gain = ctx.createGain();
+                    
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(1000, now);
+                    osc.frequency.exponentialRampToValueAtTime(450, now + 0.04);
+                    
+                    gain.gain.setValueAtTime(0.06, now);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+                    
+                    osc.connect(gain);
+                    gain.connect(ctx.destination);
+                    
+                    osc.start(now);
+                    osc.stop(now + 0.06);
+                } catch (e) {}
+            }
+            // Export click sound helper to window for outer scopes
+            window.playClickSound = playClickSound;
+
+            // --- 2. BOOT SEQUENCE & AUTOMATIC ENTER ---
+            const bootStatuses = [
+                "VÉRIFICATION DE L'INTÉGRITÉ DU NOYAU...",
+                "ÉTABLISSEMENT DE LA CONNEXION SÉCURISÉE...",
+                "CHARGEMENT DES INFRASTRUCTURES CLOUD...",
+                "SYNCHRONISATION DES PASSERELLES MT5...",
+                "DÉPLOIEMENT DES MICRO-SERVICES TELEGRAM...",
+                "INITIALISATION DES MODULES D'IA...",
+                "ACCÈS REQUIS !"
+            ];
+            
+            const statusText = document.getElementById("boot-status-text");
+            const percentLabel = document.getElementById("boot-percent");
+            const preloader = document.getElementById("preloader");
+            const svgProgressCircle = document.getElementById("svg-progress-circle");
+            
+            const infoGroup = document.getElementById("preloader-info-group");
+            const btnGroup = document.getElementById("preloader-btn-group");
+            const enterBtn = document.getElementById("enter-system-btn");
+            const preloaderLogo = document.getElementById("preloader-logo");
+            
+            const radius = 80;
+            const circumference = 2 * Math.PI * radius; // ~502.65
+            
+            let statusIdx = 0;
+            let progress = 0;
+            
+            function runBootSequence() {
+                if (statusIdx < bootStatuses.length) {
+                    statusText.innerText = bootStatuses[statusIdx];
+                    statusIdx++;
+                    
+                    const targetProgress = Math.floor((statusIdx / bootStatuses.length) * 100);
+                    const interval = setInterval(() => {
+                        if (progress < targetProgress) {
+                            progress += 1;
+                            if (progress > 100) progress = 100;
+                            
+                            // Update percentage
+                            percentLabel.innerText = `${progress.toString().padStart(2, '0')}%`;
+                            
+                            // Update SVG dashoffset
+                            const offset = circumference - (progress / 100) * circumference;
+                            svgProgressCircle.style.strokeDashoffset = offset;
+                        } else {
+                            clearInterval(interval);
+                        }
+                    }, 5);
+                    
+                    setTimeout(runBootSequence, 240);
+                } else {
+                    // Preloading completed - Trigger auto entry
+                    setTimeout(triggerEntry, 300);
+                }
+            }
+            
+            // Audio context helper
+            let audioCtx = null;
+            function initAudio() {
+                if (audioCtx) return;
+                try {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    audioCtx = new AudioContext();
+                    window.audioCtx = audioCtx;
+                } catch(e) {}
+            }
+            ['click', 'pointerdown', 'keydown', 'mousemove', 'touchstart'].forEach(evt => {
+                document.addEventListener(evt, () => {
+                    initAudio();
+                    if (audioCtx && audioCtx.state === 'suspended') {
+                        audioCtx.resume();
+                    }
+                }, { once: true });
+            });
+
+            // Run Preloader Sequence
+            setTimeout(runBootSequence, 400);
+
+            // Warp Speed control variables
+            window.speedMultiplier = 1.0;
+            
+            // Setup Hero Reveal Timeline (Pure opacity fades, no layout-shifting translations to keep page stable)
+            const entryTimeline = gsap.timeline({ paused: true });
+            entryTimeline.fromTo("#hero-logo-container", 
+                { scale: 0.6, opacity: 0 }, 
+                { scale: 1, opacity: 1, duration: 1.4, ease: "power2.out" }
+            );
+            entryTimeline.fromTo("#hero-badge", 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.7, ease: "power1.out" },
+                "-=1.1"
+            );
+            entryTimeline.fromTo("#hero-title", 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.8, ease: "power1.out" },
+                "-=0.9"
+            );
+            entryTimeline.fromTo("#hero-subtitle", 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.8, ease: "power1.out" },
+                "-=0.8"
+            );
+            entryTimeline.fromTo("#hero-buttons", 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.8, ease: "power1.out" },
+                "-=0.7"
+            );
+            entryTimeline.fromTo("#hero-tagline", 
+                { opacity: 0 }, 
+                { opacity: 1, duration: 0.7, ease: "power1.out" },
+                "-=0.5"
+            );
+
+            // Scramble Text animation helper
+            function scrambleText(element, targetText, duration = 1.2, delay = 0) {
+                setTimeout(() => {
+                    const chars = "X01_#@$%-+*/=<>{}[]";
+                    const textLength = targetText.length;
+                    let frame = 0;
+                    const totalFrames = duration * 60;
+                    
+                    element.style.opacity = 1;
+                    
+                    const interval = setInterval(() => {
+                        let result = "";
+                        const progress = frame / totalFrames;
+                        
+                        for (let i = 0; i < textLength; i++) {
+                            if (targetText[i] === " ") {
+                                result += " ";
+                            } else if (targetText[i] === "\n") {
+                                result += "<br>";
+                            } else if (i / textLength < progress) {
+                                result += targetText[i];
+                            } else {
+                                result += chars[Math.floor(Math.random() * chars.length)];
+                            }
+                        }
+                        
+                        element.innerHTML = result;
+                        frame++;
+                        if (frame >= totalFrames) {
+                            element.innerHTML = targetText.replace(/\n/g, '<br>');
+                            clearInterval(interval);
+                        }
+                    }, 1000 / 60);
+                }, delay * 1000);
+            }
+
+            // Click Access System Event Handler (Now also triggered automatically)
+            let entryTriggered = false;
+            function triggerEntry() {
+                if (entryTriggered) return;
+                entryTriggered = true;
+                
+                // Play futuristic synth drop
+                playAccessSound();
+                
+                // Explode preloader dashboard assets
+                preloaderLogo.classList.remove("animate-float");
+                gsap.to(preloaderLogo, { scale: 1.6, opacity: 0, duration: 0.8, ease: "power2.in" });
+                gsap.to(infoGroup, { scale: 0.9, opacity: 0, duration: 0.5, ease: "power2.in" });
+                gsap.to(btnGroup, { scale: 0.9, opacity: 0, duration: 0.5, ease: "power2.in" });
+                
+                const svgEl = preloader.querySelector("svg");
+                gsap.to(svgEl, { scale: 1.4, opacity: 0, duration: 0.7, ease: "power2.in" });
+                
+                // Warp Speed ThreeJS Acceleration
+                window.speedMultiplier = 35.0;
+                gsap.to(window, {
+                    speedMultiplier: 1.0,
+                    duration: 2.2,
+                    ease: "power2.out"
+                });
+                
+                // Warp Camera Deep Space Motion
+                if (window.cyberCamera) {
+                    gsap.fromTo(window.cyberCamera.position, 
+                        { z: 28 }, 
+                        { z: 8, duration: 2.4, ease: "power3.out" }
+                    );
+                }
+                
+                // Energized color flash
+                const flash = document.getElementById("warp-flash");
+                gsap.fromTo(flash, 
+                    { opacity: 1 }, 
+                    { opacity: 0, duration: 1.1, ease: "power2.out", delay: 0.05 }
+                );
+                
+                // Slide open gates
+                setTimeout(() => {
+                    preloader.classList.add("loaded");
+                    
+                    // Hide preloader completely to make sure all buttons are fully clickable
+                    setTimeout(() => {
+                        preloader.style.display = "none";
+                    }, 1400);
+                    
+                    // Play GSAP reveal timeline
+                    setTimeout(() => {
+                        entryTimeline.play();
+                        
+                        // Start normal typewriter loop delay
+                        setTimeout(startHeroTypewriter, 1200);
+                    }, 300);
+                }, 100);
+            }
+
+            // Click anywhere on preloader to SKIP/ENTER early
+            preloader.addEventListener("click", triggerEntry);
+
+
+            // --- 3. TYPING EFFECT (HERO) ---
+            const textOptions = ["KITSUN SYSTEM", "DEVELOPPEMENT WEB SUR MESURE", "ARCHITECTURES API & CLOUD", "AUTOMATISATION DE PROCESSUS", "SYSTEMES DE TRADING"];
+            const typewriterElement = document.getElementById("typewriter");
+            let textIdx = 0;
+            let charIdx = 0;
+            let isDeleting = false;
+            
+            function startHeroTypewriter() {
+                const currentText = textOptions[textIdx];
+                if (isDeleting) {
+                    typewriterElement.innerHTML = currentText.substring(0, charIdx - 1);
+                    charIdx--;
+                } else {
+                    typewriterElement.innerHTML = currentText.substring(0, charIdx + 1);
+                    charIdx++;
+                }
+
+                let typingSpeed = isDeleting ? 40 : 90;
+
+                if (!isDeleting && charIdx === currentText.length) {
+                    typingSpeed = 2000; // Hold full text
+                    isDeleting = true;
+                } else if (isDeleting && charIdx === 0) {
+                    isDeleting = false;
+                    textIdx = (textIdx + 1) % textOptions.length;
+                    typingSpeed = 500; // Brief delay before typing next
+                }
+
+                setTimeout(startHeroTypewriter, typingSpeed);
+            }
+
+
+            // --- 3. GSAP SCROLL TRIGGER ANIMATIONS ---
             gsap.registerPlugin(ScrollTrigger);
 
+            // Navbar transparent to background solid on scroll
             window.addEventListener('scroll', () => {
                 const nav = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('bg-[#010308]/90', 'shadow-lg');
+                if (window.scrollY > 40) {
+                    nav.classList.add('bg-cyber-black/90', 'shadow-2xl', 'py-1');
                     nav.classList.remove('bg-transparent');
                 } else {
-                    nav.classList.remove('bg-[#010308]/90', 'shadow-lg');
+                    nav.classList.remove('bg-cyber-black/90', 'shadow-2xl', 'py-1');
                     nav.classList.add('bg-transparent');
                 }
             });
 
+            // GSAP Scroll Reveal Elements
             const revealElements = document.querySelectorAll(".gs-reveal");
             revealElements.forEach((elem) => {
                 gsap.fromTo(elem, 
-                    { y: 50, opacity: 0 }, 
+                    { y: 40, opacity: 0 }, 
                     { 
                         y: 0, 
                         opacity: 1, 
-                        duration: 1, 
+                        duration: 1.1, 
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: elem,
-                            start: "top 85%",
+                            start: "top 88%",
                             toggleActions: "play none none reverse"
                         }
                     }
                 );
             });
 
-            // --- 3. Vanilla Tilt ---
+
+            // --- 4. TILT & MOUSE SPOTS EFFECT ---
             VanillaTilt.init(document.querySelectorAll(".tilt-card"), {
-                max: 8,
+                max: 7,
                 speed: 400,
                 glare: true,
-                "max-glare": 0.15,
-                scale: 1.02
+                "max-glare": 0.1,
+                scale: 1.01
             });
 
-            // --- 4. THREE.JS 8k Planet Background ---
+            // Card Mouseglow
+            const cards = document.querySelectorAll('.card-glow-wrapper');
+            cards.forEach(card => {
+                const spotlight = card.querySelector('.card-glow-spotlight');
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    spotlight.style.setProperty('--x', `${x}px`);
+                    spotlight.style.setProperty('--y', `${y}px`);
+                });
+            });
+
+
+            // --- 5. THREE.JS IMMERSIVE 3D PARTICLE FOX HEAD ---
             const initThreeJS = () => {
                 const canvas = document.getElementById('webgl-canvas');
                 const scene = new THREE.Scene();
-                // Add subtle fog to blend into background
-                scene.fog = new THREE.FogExp2(0x010308, 0.001);
+                scene.fog = new THREE.FogExp2(0x020005, 0.0015);
 
                 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
                 const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
                 renderer.setSize(window.innerWidth, window.innerHeight);
                 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-                // Create Particle Sphere
+                // 3D Particles Fox Geometry sommets (16 points)
+                const vertices = [
+                    [0, -0.5, 2.0],     // 0: Snout tip (nose)
+                    [0, 0.1, 1.2],      // 1: Snout bridge (midway)
+                    [0, 0.6, 0.2],      // 2: Forehead center
+                    [-0.6, -0.1, 1.0],  // 3: Left snout side base
+                    [0.6, -0.1, 1.0],   // 4: Right snout side base
+                    [-1.6, -0.2, 0.0],  // 5: Left cheek outer
+                    [1.6, -0.2, 0.0],   // 6: Right cheek outer
+                    [0, 0.7, -0.8],     // 7: Back of skull top
+                    [-0.7, 0.8, -0.2],  // 8: Left ear front base
+                    [-1.3, 0.6, -0.6],  // 9: Left ear back base
+                    [-1.7, 2.4, -0.7],  // 10: Left ear tip
+                    [0.7, 0.8, -0.2],   // 11: Right ear front base
+                    [1.3, 0.6, -0.6],   // 12: Right ear back base
+                    [1.7, 2.4, -0.7],   // 13: Right ear tip
+                    [0, -0.9, 0.3],     // 14: Throat
+                    [0, -0.6, -1.2]     // 15: Back of neck
+                ];
+
+                const faces = [
+                    // Snout
+                    [0, 1, 3], [0, 4, 1],
+                    [0, 3, 14], [0, 14, 4],
+                    
+                    // Face Front / Eyes area
+                    [1, 2, 3], [1, 4, 2],
+                    [3, 2, 5], [4, 6, 2],
+                    [3, 5, 14], [4, 14, 6],
+                    
+                    // Skull / Forehead
+                    [2, 8, 7], [2, 7, 11],
+                    [2, 5, 8], [2, 11, 6],
+                    
+                    // Left Ear
+                    [8, 10, 9], [8, 5, 10], [9, 10, 7], [8, 9, 7],
+                    
+                    // Right Ear
+                    [11, 12, 13], [11, 13, 6], [12, 7, 13], [11, 7, 12],
+                    
+                    // Back of head and neck
+                    [7, 9, 15], [7, 15, 12],
+                    [5, 15, 9], [6, 12, 15],
+                    [5, 14, 15], [6, 15, 14]
+                ];
+
+                function sampleTriangle(v0, v1, v2) {
+                    let r1 = Math.random();
+                    let r2 = Math.random();
+                    if (r1 + r2 > 1) {
+                        r1 = 1 - r1;
+                        r2 = 1 - r2;
+                    }
+                    const r3 = 1 - r1 - r2;
+                    return [
+                        r1 * v0[0] + r2 * v1[0] + r3 * v2[0],
+                        r1 * v0[1] + r2 * v1[1] + r3 * v2[1],
+                        r1 * v0[2] + r2 * v1[2] + r3 * v2[2]
+                    ];
+                }
+
                 const geometry = new THREE.BufferGeometry();
-                const particlesCount = window.innerWidth < 768 ? 3000 : 8000; // Dense point cloud
+                const particlesCount = window.innerWidth < 768 ? 6000 : 15000;
                 const posArray = new Float32Array(particlesCount * 3);
                 const colorArray = new Float32Array(particlesCount * 3);
 
                 for(let i = 0; i < particlesCount * 3; i+=3) {
-                    // Random spherical distribution
-                    const r = 10 + Math.random() * 0.5; // Radius
-                    const theta = Math.random() * Math.PI * 2;
-                    const phi = Math.acos((Math.random() * 2) - 1);
+                    if (Math.random() < 0.06) {
+                        // 6% of background drifting embers
+                        posArray[i] = (Math.random() - 0.5) * 12;
+                        posArray[i+1] = (Math.random() - 0.5) * 12;
+                        posArray[i+2] = (Math.random() - 0.5) * 12;
+                    } else {
+                        // Sample from fox model
+                        const faceIdx = Math.floor(Math.random() * faces.length);
+                        const face = faces[faceIdx];
+                        
+                        const v0 = vertices[face[0]];
+                        const v1 = vertices[face[1]];
+                        const v2 = vertices[face[2]];
+                        
+                        const point = sampleTriangle(v0, v1, v2);
+                        
+                        const scale = 2.8;
+                        posArray[i] = point[0] * scale;
+                        posArray[i+1] = point[1] * scale - 0.5;
+                        posArray[i+2] = point[2] * scale;
+                        
+                        // Add slight random shell noise
+                        posArray[i] += (Math.random() - 0.5) * 0.08;
+                        posArray[i+1] += (Math.random() - 0.5) * 0.08;
+                        posArray[i+2] += (Math.random() - 0.5) * 0.08;
+                    }
 
-                    posArray[i] = r * Math.sin(phi) * Math.cos(theta);
-                    posArray[i+1] = r * Math.sin(phi) * Math.sin(theta);
-                    posArray[i+2] = r * Math.cos(phi);
-
-                    // Colors: Mix of Blue and Cyan
-                    const mix = Math.random();
-                    colorArray[i] = 0.0; // R
-                    colorArray[i+1] = mix > 0.5 ? 0.4 : 0.89; // G
-                    colorArray[i+2] = 1.0; // B
+                    // Color gradient based on Y height
+                    const heightRatio = (posArray[i+1] + 3.0) / 7.0;
+                    const mixRatio = heightRatio + Math.random() * 0.15;
+                    colorArray[i] = mixRatio > 0.6 ? 0.85 : 0.54;   // R
+                    colorArray[i+1] = mixRatio > 0.6 ? 0.27 : 0.36; // G
+                    colorArray[i+2] = mixRatio > 0.6 ? 0.93 : 0.96; // B
                 }
 
                 geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
                 geometry.setAttribute('color', new THREE.BufferAttribute(colorArray, 3));
 
-                // Custom shader material for glowing points
+                // Glowing points shader material (same texture)
                 const material = new THREE.PointsMaterial({
-                    size: 0.03,
+                    size: window.innerWidth < 768 ? 0.045 : 0.025,
                     vertexColors: true,
                     blending: THREE.AdditiveBlending,
                     transparent: true,
-                    opacity: 0.8
+                    opacity: 0.75
                 });
 
-                const sphere = new THREE.Points(geometry, material);
-                // Position sphere to the right and slightly down
-                sphere.position.set(5, -2, -15);
-                scene.add(sphere);
+                const vortex = new THREE.Points(geometry, material);
+                
+                // Position fox head slightly to the right on desktop, center on mobile
+                if (window.innerWidth >= 768) {
+                    vortex.position.set(3.5, 0.5, -6);
+                    vortex.rotation.y = -Math.PI / 4; // Three-quarter view
+                } else {
+                    vortex.position.set(0, 0, -8);
+                }
+                
+                scene.add(vortex);
 
-                // Add an outer ring
-                const ringGeo = new THREE.TorusGeometry(12, 0.02, 16, 100);
-                const ringMat = new THREE.MeshBasicMaterial({ color: 0x00e5ff, transparent: true, opacity: 0.2, wireframe: true });
-                const ring = new THREE.Mesh(ringGeo, ringMat);
-                ring.position.copy(sphere.position);
-                ring.rotation.x = Math.PI / 2.2;
-                scene.add(ring);
+                camera.position.z = 8;
+                camera.position.y = 1;
+                window.cyberCamera = camera;
 
-                camera.position.z = 5;
-
-                // Mouse interaction
+                // Mouse interaction coords
                 let mouseX = 0;
                 let mouseY = 0;
-                let targetX = 0;
-                let targetY = 0;
                 const windowHalfX = window.innerWidth / 2;
                 const windowHalfY = window.innerHeight / 2;
 
@@ -851,27 +1449,33 @@
                     mouseY = (event.clientY - windowHalfY);
                 });
 
-                // Animation loop
+                // Render animation loop
                 const animate = () => {
                     requestAnimationFrame(animate);
 
-                    targetX = mouseX * 0.001;
-                    targetY = mouseY * 0.001;
+                    // Continuous slow rotative Y axis motion, reacting to speedMultiplier
+                    const multiplier = window.speedMultiplier || 1.0;
+                    vortex.rotation.y += 0.0012 * multiplier;
+                    
+                    // Slow breathing pulse
+                    const time = Date.now() * 0.0012;
+                    const pulse = 1.0 + Math.sin(time) * 0.035;
+                    vortex.scale.set(pulse, pulse, pulse);
 
-                    sphere.rotation.y += 0.001;
-                    sphere.rotation.x += 0.0005;
-                    ring.rotation.z -= 0.002;
-
-                    // Subtle camera movement based on mouse
-                    camera.position.x += (mouseX * 0.005 - camera.position.x) * 0.05;
-                    camera.position.y += (-mouseY * 0.005 - camera.position.y) * 0.05;
-                    camera.lookAt(scene.position);
+                    // Camera position follow cursor slowly
+                    const targetCamX = (mouseX * 0.006);
+                    const targetCamY = (-mouseY * 0.006);
+                    
+                    camera.position.x += (targetCamX - camera.position.x) * 0.04;
+                    camera.position.y += (targetCamY - camera.position.y) * 0.04;
+                    camera.lookAt(vortex.position);
 
                     renderer.render(scene, camera);
                 };
 
                 animate();
 
+                // Responsive listener
                 window.addEventListener('resize', () => {
                     camera.aspect = window.innerWidth / window.innerHeight;
                     camera.updateProjectionMatrix();
@@ -879,127 +1483,93 @@
                 });
             };
 
-            // Start ThreeJS only on desktop to ensure 60fps, or lower res on mobile
+            // Initiate ThreeJS scene background
             initThreeJS();
         });
 
-        // --- 5. MODALS LOGIC ---
-        const overlay = document.getElementById('modal-overlay');
-        const modals = document.querySelectorAll('.modal-content');
 
-        window.openModal = function(id) {
-            // Hide all
-            modals.forEach(m => {
-                m.classList.add('hidden');
-                m.classList.remove('scale-100');
-                m.classList.add('scale-95');
+        // --- 6. CONFIGURATOR ENGINE ---
+        const configOptions = {
+            web: { name: "Interface Web & Dashboards", node: "node-web", link: "link-web", days: 5 },
+            telegram: { name: "Bot Telegram VIP", node: "node-telegram", link: "link-telegram", days: 4 },
+            mt5: { name: "Passerelle Trading MT5", node: "node-mt5", link: "link-mt5", days: 5 },
+            script: { name: "Scripts d'Automatisation", node: "node-script", link: "link-script", days: 3 },
+            db: { name: "Base de Données PostgreSQL", node: "node-db", link: "link-db", days: 3 },
+            pay: { name: "Paywall Stripe & Crypto", node: "node-pay", link: "link-pay", days: 4 },
+            ai: { name: "Analyses IA / LLM", node: "node-ai", link: "link-ai", days: 4 },
+            vps: { name: "Hébergement VPS Haute Perf", node: "node-vps", link: "link-vps", days: 2 }
+        };
+
+        const checkBoxes = document.querySelectorAll('.config-checkbox');
+        const timelineElement = document.getElementById('config-timeline');
+        const descElement = document.getElementById('config-desc');
+        const tgLinkBtn = document.getElementById('config-tg-btn');
+
+        function updateConfigurator() {
+            let activeOptions = [];
+            let totalDays = 5; // Base delivery days
+
+            checkBoxes.forEach(box => {
+                const id = box.dataset.opt;
+                const opt = configOptions[id];
+                const nodeEl = document.getElementById(opt.node);
+                const linkEl = document.getElementById(opt.link);
+
+                if (box.checked) {
+                    activeOptions.push(opt.name);
+                    totalDays += opt.days;
+
+                    // Light up SVG elements
+                    nodeEl.setAttribute('stroke', '#d946ef');
+                    nodeEl.setAttribute('fill', '#8b5cf6');
+                    nodeEl.setAttribute('stroke-width', '3');
+                    
+                    linkEl.setAttribute('stroke', '#8b5cf6');
+                    linkEl.setAttribute('opacity', '1');
+                    linkEl.classList.add('data-flow-line');
+                } else {
+                    // Reset SVG elements
+                    nodeEl.setAttribute('stroke', '#1e1135');
+                    nodeEl.setAttribute('fill', '#070212');
+                    nodeEl.setAttribute('stroke-width', '2');
+
+                    linkEl.setAttribute('stroke', '#1e1135');
+                    linkEl.setAttribute('opacity', '0.2');
+                    linkEl.classList.remove('data-flow-line');
+                }
             });
-            // Show overlay
-            overlay.classList.remove('hidden');
-            overlay.classList.add('flex');
-            // Trigger reflow
-            void overlay.offsetWidth;
-            overlay.classList.remove('opacity-0');
-            
-            // Show specific modal
-            const target = document.getElementById(id);
-            if(target) {
-                target.classList.remove('hidden');
-                setTimeout(() => {
-                    target.classList.remove('scale-95');
-                    target.classList.add('scale-100');
-                }, 10);
-            }
 
-            // Lock body scroll
-            document.body.style.overflow = 'hidden';
-        }
-
-        window.closeModal = function() {
-            overlay.classList.add('opacity-0');
-            modals.forEach(m => {
-                m.classList.remove('scale-100');
-                m.classList.add('scale-95');
-            });
-            setTimeout(() => {
-                overlay.classList.add('hidden');
-                overlay.classList.remove('flex');
-                modals.forEach(m => m.classList.add('hidden'));
-                document.body.style.overflow = '';
-            }, 300);
-        }
-
-        // Close on background click
-        overlay.addEventListener('click', (e) => {
-            if(e.target === overlay) closeModal();
-        });
-
-        // --- Mini-Apps Logic ---
-
-        // Telegram Toast
-        window.fireTelegramToast = function() {
-            const toast = document.getElementById('tg-toast');
-            toast.classList.remove('opacity-0');
-            setTimeout(() => { toast.classList.add('opacity-0'); }, 3000);
-        }
-
-        // MT5 Flow Animation
-        window.triggerFlow = function(direction) {
-            const container = document.getElementById('mt5-flow-container');
-            const log = document.getElementById('mt5-log');
-            
-            // Create dot
-            const dot = document.createElement('div');
-            dot.className = `data-dot animate-flow-${direction}`;
-            container.appendChild(dot);
-
-            if(direction === 'right') {
-                log.innerHTML = "<span class='text-blue-400'>Signal IA détecté...</span> Envoi vers Serveur...";
-                setTimeout(() => { log.innerHTML = "<span class='text-cyber-cyan'>Traitement serveur (4ms)...</span> Envoi vers MT5..."; }, 750);
-                setTimeout(() => { log.innerHTML = "<span class='text-orange-400 font-bold'>✓ Trade exécuté sur MT5 avec succès.</span>"; }, 1500);
+            // Update text description
+            if (activeOptions.length === 0) {
+                descElement.innerHTML = "Sélectionnez au moins une option pour générer l'architecture réseau de votre système.";
+                timelineElement.innerText = "Délai d'ingénierie : 0 jour";
+                tgLinkBtn.setAttribute('href', 'https://t.me/ysestp');
             } else {
-                log.innerHTML = "<span class='text-orange-400'>Clôture de trade détectée (MT5)...</span> Remontée Serveur...";
-                setTimeout(() => { log.innerHTML = "<span class='text-cyber-cyan'>Génération du rapport...</span> Push Telegram..."; }, 750);
-                setTimeout(() => { log.innerHTML = "<span class='text-blue-400 font-bold'>✓ Message VIP envoyé avec les gains.</span>"; }, 1500);
+                descElement.innerHTML = `<strong>Architecture personnalisée active :</strong> Connecte et synchronise ${activeOptions.length} modules logiques.<br><br>Votre système sera structuré de façon modulaire, connecté de bout en bout via des tunnels chiffrés et configuré pour s'exécuter à ultra-faible latence.`;
+                timelineElement.innerText = `Délai d'ingénierie estimé : ~${totalDays} jours`;
+                
+                // Create custom telegram message link
+                const textMsg = `Bonjour Kitsun System,\n\nJe souhaite concevoir un système sur mesure avec la configuration suivante :\n${activeOptions.map(o => `• ${o}`).join('\n')}\n\nMerci de me donner des informations sur la faisabilité de ce projet.`;
+                tgLinkBtn.setAttribute('href', `https://t.me/ysestp?text=${encodeURIComponent(textMsg)}`);
             }
-
-            // Cleanup dot
-            setTimeout(() => { dot.remove(); }, 1500);
         }
 
-        // SaaS Terminal
-        window.saasAction = function(action) {
-            const terminal = document.getElementById('saas-terminal');
-            const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
-            
-            let color = "text-cyber-cyan";
-            let msg = "";
-
-            if(action === 'RESTART_ENGINE') {
-                msg = "WARN: Initiating engine restart...";
-                color = "text-yellow-400";
-            } else if (action === 'CLEAR_CACHE') {
-                msg = "INFO: Redis cache cleared successfully (0.02s).";
-                color = "text-green-400";
-            }
-
-            // Print Action
-            const p1 = document.createElement('p');
-            p1.className = color;
-            p1.innerText = `["${now}"] POST /api/admin/action {"type":"${action}"}`;
-            terminal.appendChild(p1);
-
-            // Print Result after fake delay
-            setTimeout(() => {
-                const p2 = document.createElement('p');
-                p2.className = color;
-                p2.innerText = `["${now}"] ${msg}`;
-                terminal.appendChild(p2);
-                terminal.scrollTop = terminal.scrollHeight; // Auto-scroll
-            }, 400);
-            
-            terminal.scrollTop = terminal.scrollHeight;
+        // Play click sound on user interaction
+        checkBoxes.forEach(box => {
+            box.addEventListener('change', () => {
+                if (window.playClickSound) window.playClickSound();
+                updateConfigurator();
+            });
+        });
+        
+        if (tgLinkBtn) {
+            tgLinkBtn.addEventListener('click', () => {
+                if (window.playClickSound) window.playClickSound();
+            });
         }
+
+        // Run on load
+        updateConfigurator();
 
     </script>
 </body>
